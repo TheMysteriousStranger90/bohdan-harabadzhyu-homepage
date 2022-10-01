@@ -13,7 +13,7 @@ const Profile: React.FC<ProfileProps> = ({profileSrc}) => {
             <Flex align='center' justify='center' wrap='wrap' pt={2}>
                 <Box
                     display='block'
-                    minW={{base: '210px', sm: '210px', md: '230px'}}
+                    minW={{base: '210px', sm: '210px',  md: '0 0 0 50px'}}
                     h='100%'
                     px={{base: 2, sm: 2}}
                     py={2}
