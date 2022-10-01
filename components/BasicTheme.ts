@@ -1,5 +1,5 @@
-﻿import { extendTheme, type ThemeConfig } from '@chakra-ui/react';
-import type { StyleFunctionProps } from '@chakra-ui/styled-system';
+﻿import {extendTheme, type ThemeConfig} from '@chakra-ui/react';
+import type {StyleFunctionProps} from '@chakra-ui/styled-system';
 
 const styles = {
     global: (props: StyleFunctionProps) => ({
