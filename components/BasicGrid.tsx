@@ -22,7 +22,7 @@ const testimonials = [
             'I aspire to combine my passion for programming and technology to create interest web applications. ' +
             'I am also fond of classical music, fiction literature and english lessons... ',
         avatar:
-            'https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80',
+            './about_me_logo.png',
     },
     {
         title: 'EDUCATION',
@@ -30,21 +30,21 @@ const testimonials = [
             '|| First Higher Education – V.O. Sukhomlynskyi Mykolaiv National University (Ethnology. Obtained qualification: Master Degree. 2017)\n' +
             '|| Second Higher Education – Admiral Makarov National University of Shipbuilding (Computer sciences. Obtained qualification: Bachelor’s Degree. 2021) ||',
         avatar:
-            'https://images.unsplash.com/photo-1598550874175-4d0ef436c909?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80',
+            './education_logo.jpg',
     },
     {
         title: 'SKILLS',
         content:
             '|| Programming languages: C#, TypeScript, SQL || ' + 'Frameworks: ASP.NET Core, Entity Framework, Angular || ' + 'Database: MSSQL || ',
         avatar:
-            'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=334&q=80',
+            './csharp_logo.png',
     },
     {
         title: 'PROJECTS',
         content:
-            'A visit to my GitHub Profile',
+            '    ||   A visit to my GitHub Profile   ||   ',
         avatar:
-            'https://images.unsplash.com/photo-1606513542745-97629752a13b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80',
+            './github_logo.png',
     },
 ];
 
@@ -60,6 +60,12 @@ const basicInfo = (
             label='telegram'
             link={`https://t.me/TheMysteriousStranger90`}
             icon={<FaTelegram size={32}/>}
+        />
+
+        <ContactIcon
+            label='github'
+            link={`https://github.com/TheMysteriousStranger90`}
+            icon={<FiGithub size={32}/>}
         />
     </>
 );
@@ -123,8 +129,8 @@ function TestimonialCard(props: TestimonialCardProps) {
             </Flex>
             <Avatar
                 src={avatar}
-                height={'160px'}
-                width={'160px'}
+                height={'120px'}
+                width={'120px'}
                 alignSelf={'center'}
                 m={{base: '0 0 35px 0', md: '0 0 0 50px'}}
             />
@@ -193,7 +199,7 @@ export default function GridBlurredBackdrop() {
                 mt={16}
                 mx={'auto'}>
                 {testimonials.map((cardInfo, index) => (
-                    <TestimonialCard {...cardInfo} index={index}/>
+                    <TestimonialCard {...cardInfo} index={index} />
                 ))}
             </SimpleGrid>
             <Box>

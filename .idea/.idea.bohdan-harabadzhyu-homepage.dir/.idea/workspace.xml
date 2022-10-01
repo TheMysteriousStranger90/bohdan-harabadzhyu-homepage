@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3197ccaf-5bd1-4b5d-861c-ead8d5bcb975" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/components/BasicGrid.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/ContactIcon.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/Footer.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/Profile.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/SubSection.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/adobe_express.svg" afterDir="false" />
+    <list default="true" id="3197ccaf-5bd1-4b5d-861c-ead8d5bcb975" name="Changes" comment="...">
+      <change afterPath="$PROJECT_DIR$/public/about_me_logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/book_logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/csharp_logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/education_logo.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/github_logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/skills_logo.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.bohdan-harabadzhyu-homepage.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.bohdan-harabadzhyu-homepage.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/BasicTheme.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/BasicTheme.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/BasicGrid.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/BasicGrid.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vercel.svg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +56,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1664608665619</updated>
-      <workItem from="1664608679339" duration="25295000" />
+      <workItem from="1664608679339" duration="30024000" />
     </task>
     <task id="LOCAL-00001" summary="Init...">
       <created>1664609617435</created>
@@ -66,7 +65,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664609617435</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="...">
+      <created>1664635220386</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1664635220386</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -89,6 +95,7 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Init..." />
-    <option name="LAST_COMMIT_MESSAGE" value="Init..." />
+    <MESSAGE value="..." />
+    <option name="LAST_COMMIT_MESSAGE" value="..." />
   </component>
 </project>
