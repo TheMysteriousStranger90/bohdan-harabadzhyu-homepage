@@ -11,8 +11,6 @@ B
 styles/globals.css,8\c\8c258232cbcd5d83991c524a9e86c8d3f984fc57
 <
 package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
-H
-components/BasicTheme.ts,b\d\bd4b0a3242b913e99edb584edb7955a7ccddec40
 J
 components/ContactIcon.tsx,9\4\942e3047fa61bef8d8fb444f8ece07b372554415
 E

@@ -154,7 +154,7 @@ export default function GridBlurredBackdrop() {
                 />
 
                 <chakra.h3
-                    fontFamily={'Open Sans'}
+                    fontFamily={'Nunito'}
                     fontWeight={'bold'}
                     fontSize={25}
                     color={'#f7fafc'}>
@@ -164,7 +164,7 @@ export default function GridBlurredBackdrop() {
                 <chakra.h1
                     py={6}
                     fontSize={22}
-                    fontFamily={'Open Sans'}
+                    fontFamily={'Nunito'}
                     fontWeight={600}
                     color={'#f7fafc'}>
                     How to reach me ...

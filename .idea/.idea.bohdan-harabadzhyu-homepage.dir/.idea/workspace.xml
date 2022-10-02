@@ -1,28 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3197ccaf-5bd1-4b5d-861c-ead8d5bcb975" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.vs/ProjectSettings.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.vs/VSWorkspaceState.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.vs/bohdan-harabadzhyu-homepage/FileContentIndex/60380bc8-f046-4844-bcfa-c11912b92f66.vsidx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.vs/bohdan-harabadzhyu-homepage/FileContentIndex/read.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.vs/bohdan-harabadzhyu-homepage/v17/.suo" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.vs/slnx.sqlite" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/book.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/cpu.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/smile.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/terminal.svg" afterDir="false" />
+    <list default="true" id="3197ccaf-5bd1-4b5d-861c-ead8d5bcb975" name="Changes" comment="...">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.bohdan-harabadzhyu-homepage.dir/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.bohdan-harabadzhyu-homepage.dir/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.bohdan-harabadzhyu-homepage.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.bohdan-harabadzhyu-homepage.dir/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/BasicGrid.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/BasicGrid.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/api/hello.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/about_me_logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/book_logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/csharp_logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/education_logo.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/github_logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/skills_logo.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +50,7 @@
       <option name="presentableId" value="Default" />
       <updated>1664608665619</updated>
       <workItem from="1664608679339" duration="32495000" />
-      <workItem from="1664681979687" duration="1587000" />
+      <workItem from="1664681979687" duration="1943000" />
     </task>
     <task id="LOCAL-00001" summary="Init...">
       <created>1664609617435</created>
@@ -99,7 +80,21 @@
       <option name="project" value="LOCAL" />
       <updated>1664642187937</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="changes logo...">
+      <created>1664683719550</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1664683719550</updated>
+    </task>
+    <task id="LOCAL-00006" summary="...">
+      <created>1664683899749</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1664683899749</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -122,9 +117,10 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Init..." />
-    <MESSAGE value="..." />
     <MESSAGE value="add images..." />
     <MESSAGE value="fix.." />
-    <option name="LAST_COMMIT_MESSAGE" value="fix.." />
+    <MESSAGE value="changes logo..." />
+    <MESSAGE value="..." />
+    <option name="LAST_COMMIT_MESSAGE" value="..." />
   </component>
 </project>
