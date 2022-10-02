@@ -21,7 +21,7 @@ const testimonials = [
             'I am passionate about C# development and I focus on application created in ASP.NET MVC, .NET CORE and Web API. ' +
             'I aspire to combine my passion for programming and technology to create interest web applications. ' +
             'I am also fond of classical music, fiction literature and english lessons... ',
-        avatar:
+        logo:
             './smile.svg',
     },
     {
@@ -29,21 +29,21 @@ const testimonials = [
         content:
             '|| First Higher Education – V.O. Sukhomlynskyi Mykolaiv National University (Ethnology. Obtained qualification: Master Degree. 2017)\n' +
             '|| Second Higher Education – Admiral Makarov National University of Shipbuilding (Computer sciences. Obtained qualification: Bachelor’s Degree. 2021) ||',
-        avatar:
+        logo:
             './book.svg',
     },
     {
         title: 'SKILLS',
         content:
             '|| Programming languages: C#, TypeScript, SQL || ' + 'Frameworks: ASP.NET Core, Entity Framework, Angular || ' + 'Database: MSSQL || ',
-        avatar:
+        logo:
             './cpu.svg',
     },
     {
         title: 'PROJECTS',
         content:
             '    ||   A visit to my GitHub Profile   ||   ',
-        avatar:
+        logo:
             './terminal.svg',
     },
 ];
@@ -84,12 +84,12 @@ const githubInfo = (
 interface TestimonialCardProps {
     title: string;
     content: string;
-    avatar: string;
+    logo: string;
     index: number;
 }
 
 function TestimonialCard(props: TestimonialCardProps) {
-    const {title, content, avatar, index} = props;
+    const {title, content, logo, index} = props;
     return (
         <Flex
             boxShadow={'lg'}
@@ -128,7 +128,7 @@ function TestimonialCard(props: TestimonialCardProps) {
 
             </Flex>
             <Avatar
-                src={avatar}
+                src={logo}
                 height={'120px'}
                 width={'120px'}
                 alignSelf={'center'}
@@ -182,7 +182,7 @@ export default function GridBlurredBackdrop() {
                         {basicInfo}
                     </Stack>
                 </chakra.h1>
-                
+
                 <chakra.h2
                     margin={'auto'}
                     width={'70%'}
@@ -191,7 +191,7 @@ export default function GridBlurredBackdrop() {
                     color={'#f7fafc'}>
                     ...a few facts about me...
                 </chakra.h2>
-                
+
             </Box>
             <SimpleGrid
                 columns={{base: 1, xl: 2}}
@@ -199,7 +199,7 @@ export default function GridBlurredBackdrop() {
                 mt={16}
                 mx={'auto'}>
                 {testimonials.map((cardInfo, index) => (
-                    <TestimonialCard {...cardInfo} index={index} />
+                    <TestimonialCard {...cardInfo} index={index}/>
                 ))}
             </SimpleGrid>
             <Box>
