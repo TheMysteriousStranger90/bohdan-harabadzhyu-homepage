@@ -8,7 +8,7 @@ type ContactIconProps = {
 }
 
 const ContactIcon: React.FC<ContactIconProps> = ({label, link, icon}) => {
-    
+
     return (
         <IconButton
             as='a'

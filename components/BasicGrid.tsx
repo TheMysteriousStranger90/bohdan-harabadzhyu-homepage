@@ -14,8 +14,9 @@ import {FiGithub, FiMail} from 'react-icons/fi';
 import {FaTelegram} from 'react-icons/fa';
 import ContactIcon from "./ContactIcon";
 
-const testimonials = [
+const myinformation = [
     {
+        index: 1,
         title: 'ABOUT ME',
         content:
             'I am passionate about C# development and I focus on application created in ASP.NET MVC, .NET CORE and Web API. ' +
@@ -25,6 +26,7 @@ const testimonials = [
             './smile.svg',
     },
     {
+        index: 2,
         title: 'EDUCATION',
         content:
             '|| First Higher Education – V.O. Sukhomlynskyi Mykolaiv National University (Ethnology. Obtained qualification: Master Degree. 2017)\n' +
@@ -33,6 +35,7 @@ const testimonials = [
             './book.svg',
     },
     {
+        index: 3,
         title: 'SKILLS',
         content:
             '|| Programming languages: C#, TypeScript, SQL || ' + 'Frameworks: ASP.NET Core, Entity Framework, Angular || ' + 'Database: MSSQL || ',
@@ -40,6 +43,7 @@ const testimonials = [
             './cpu.svg',
     },
     {
+        index: 4,
         title: 'PROJECTS',
         content:
             '    ||   A visit to my GitHub Profile   ||   ',
@@ -198,8 +202,8 @@ export default function GridBlurredBackdrop() {
                 spacing={'20'}
                 mt={16}
                 mx={'auto'}>
-                {testimonials.map((cardInfo, index) => (
-                    <TestimonialCard {...cardInfo} index={index}/>
+                {myinformation.map((cardInfo, index) => (
+                    <TestimonialCard key={cardInfo.index}  {...cardInfo} />
                 ))}
             </SimpleGrid>
             <Box>
