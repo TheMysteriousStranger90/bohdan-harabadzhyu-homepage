@@ -22,7 +22,7 @@ const testimonials = [
             'I aspire to combine my passion for programming and technology to create interest web applications. ' +
             'I am also fond of classical music, fiction literature and english lessons... ',
         avatar:
-            './about_me_logo.png',
+            './smile.svg',
     },
     {
         title: 'EDUCATION',
@@ -30,21 +30,21 @@ const testimonials = [
             '|| First Higher Education – V.O. Sukhomlynskyi Mykolaiv National University (Ethnology. Obtained qualification: Master Degree. 2017)\n' +
             '|| Second Higher Education – Admiral Makarov National University of Shipbuilding (Computer sciences. Obtained qualification: Bachelor’s Degree. 2021) ||',
         avatar:
-            './education_logo.jpg',
+            './book.svg',
     },
     {
         title: 'SKILLS',
         content:
             '|| Programming languages: C#, TypeScript, SQL || ' + 'Frameworks: ASP.NET Core, Entity Framework, Angular || ' + 'Database: MSSQL || ',
         avatar:
-            './csharp_logo.png',
+            './cpu.svg',
     },
     {
         title: 'PROJECTS',
         content:
             '    ||   A visit to my GitHub Profile   ||   ',
         avatar:
-            './github_logo.png',
+            './terminal.svg',
     },
 ];
 
