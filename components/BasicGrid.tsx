@@ -19,9 +19,7 @@ const myinformation = [
         index: 1,
         title: 'ABOUT ME',
         content:
-            'I am passionate about C# development and I focus on application created in ASP.NET MVC, .NET CORE and Web API. ' +
-            'I aspire to combine my passion for programming and technology to create interest web applications. ' +
-            'I am also fond of classical music, fiction literature and english lessons... ',
+            ' I am passionate about C# development and focus on creating applications using ASP.NET MVC, .NET Core, and Web API. I aspire to combine my passion for programming and technology to create engaging web applications. I am also fond of classical music, fiction literature, and English lessons. ',
         logo:
             './smile.svg',
     },
@@ -38,17 +36,23 @@ const myinformation = [
         index: 3,
         title: 'SKILLS',
         content:
-            '|| Programming languages: C#, TypeScript, SQL || ' + 'Frameworks: ASP.NET Core, Entity Framework, Angular || ' + 'Database: MSSQL || ',
+            '|| Programming languages: C#, TypeScript, SQL || ' + 'Frameworks: ASP.NET Core, Entity Framework, Angular, Avalonia UI || ' + 'Database: MSSQL || ',
         logo:
             './cpu.svg',
     },
     {
         index: 4,
         title: 'PROJECTS',
-        content:
-            '    ||   A visit to my GitHub Profile   ||   ',
-        logo:
-            './terminal.svg',
+        content: [
+            { name: 'VoiceRecorder', url: 'https://github.com/TheMysteriousStranger90/VoiceRecorder' },
+            { name: 'LogAnalyzerForWindows', url: 'https://github.com/TheMysteriousStranger90/LogAnalyzerForWindows' },
+            { name: 'SocialNetworkV2', url: 'https://github.com/TheMysteriousStranger90/SocialNetworkV2' },
+            { name: 'CodeForum', url: 'https://github.com/TheMysteriousStranger90/CodeForum' },
+            { name: 'TelegramBotForSpotify', url: 'https://github.com/TheMysteriousStranger90/TelegramBotForSpotify' },
+            { name: 'ConsoleWebScraper', url: 'https://github.com/TheMysteriousStranger90/ConsoleWebScraper' },
+            // добавьте больше проектов здесь
+        ],
+        logo: './terminal.svg',
     },
 ];
 
@@ -85,9 +89,14 @@ const githubInfo = (
 );
 
 
+interface Project {
+    name: string;
+    url: string;
+}
+
 interface TestimonialCardProps {
     title: string;
-    content: string;
+    content: string | Project[];
     logo: string;
     index: number;
 }
@@ -122,13 +131,29 @@ function TestimonialCard(props: TestimonialCardProps) {
                     </chakra.span>
                 </chakra.p>
 
-                <chakra.p
-                    fontFamily={'Oswald'}
-                    fontWeight={'large'}
-                    fontSize={'20px'}
-                    pb={8}>
-                    {content}
-                </chakra.p>
+                {Array.isArray(content) ? (
+                    <chakra.p
+                        fontFamily={'Oswald'}
+                        fontWeight={'large'}
+                        fontSize={'20px'}
+                        pb={8}>
+                        {content.map((project: Project) => (
+                            <chakra.a href={project.url} key={project.name}>
+                                {project.name}
+                            </chakra.a>
+                        )).reduce((prev: (JSX.Element | string)[], curr: JSX.Element, index: number) => {
+                            return index === 0 ? [curr] : [...prev, ', ', curr];
+                        }, [])}
+                    </chakra.p>
+                ) : (
+                    <chakra.p
+                        fontFamily={'Oswald'}
+                        fontWeight={'large'}
+                        fontSize={'20px'}
+                        pb={8}>
+                        {content}
+                    </chakra.p>
+                )}
 
             </Flex>
             <Avatar
