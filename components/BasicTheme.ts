@@ -4,7 +4,7 @@ import type {StyleFunctionProps} from '@chakra-ui/styled-system';
 const styles = {
     global: (props: StyleFunctionProps) => ({
         body: {
-            bg: props.colorMode === 'dark' ? '#202023' : '#F1E3D7',
+            bg: props.colorMode === 'dark' ? '#202023' : '#ebf3fc',
         },
     }),
 };

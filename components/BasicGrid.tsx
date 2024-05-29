@@ -14,6 +14,9 @@ import {FiGithub, FiMail} from 'react-icons/fi';
 import {FaTelegram} from 'react-icons/fa';
 import ContactIcon from "./ContactIcon";
 
+import { IconButton, useColorMode } from '@chakra-ui/react';
+import { FaSun, FaMoon } from 'react-icons/fa';
+
 const myinformation = [
     {
         index: 1,
@@ -42,7 +45,7 @@ const myinformation = [
     },
     {
         index: 4,
-        title: 'PROJECTS',
+        title: 'SOME PROJECTS',
         content: [
             { name: 'VoiceRecorder', url: 'https://github.com/TheMysteriousStranger90/VoiceRecorder' },
             { name: 'LogAnalyzerForWindows', url: 'https://github.com/TheMysteriousStranger90/LogAnalyzerForWindows' },
@@ -88,6 +91,22 @@ const githubInfo = (
     </>
 );
 
+const ThemeToggleButton = () => {
+    const { colorMode, toggleColorMode } = useColorMode();
+    const buttonBackground = useColorModeValue('#1363d2', '#68217a');
+    const buttonColor = useColorModeValue('#202023', '#f7fafc');
+
+    return (
+        <IconButton
+            aria-label="Toggle theme"
+            icon={colorMode === 'light' ? <FaMoon /> : <FaSun />}
+            onClick={toggleColorMode}
+            color={buttonColor}
+            backgroundColor={buttonBackground}
+        />
+    );
+};
+
 
 interface Project {
     name: string;
@@ -103,6 +122,9 @@ interface TestimonialCardProps {
 
 function TestimonialCard(props: TestimonialCardProps) {
     const {title, content, logo, index} = props;
+    const backgroundColor = useColorModeValue('#1363d2', '#68217a');
+    const textColor = useColorModeValue('#202023', '#f7fafc');
+
     return (
         <Flex
             boxShadow={'lg'}
@@ -113,7 +135,7 @@ function TestimonialCard(props: TestimonialCardProps) {
             p={10}
             justifyContent={'space-between'}
             position={'relative'}
-            bg={useColorModeValue('#212121', '#68217a')}
+            bg={backgroundColor}
             _after={{}}
             _before={{}}>
             <Flex
@@ -121,12 +143,12 @@ function TestimonialCard(props: TestimonialCardProps) {
                 textAlign={'left'}
                 justifyContent={'space-between'}>
 
-                <chakra.p fontFamily={'Open Sans'} fontWeight={'bold'} fontSize={22}>
+                <chakra.p fontFamily={'Open Sans'} fontWeight={'bold'} fontSize={22} color={textColor}>
                     {title}
                     <chakra.span
                         fontFamily={'Oswald'}
                         fontWeight={'medium'}
-                        color={'f7fafc'}>
+                        color={textColor}>
                         {' '}
                     </chakra.span>
                 </chakra.p>
@@ -136,7 +158,8 @@ function TestimonialCard(props: TestimonialCardProps) {
                         fontFamily={'Oswald'}
                         fontWeight={'large'}
                         fontSize={'20px'}
-                        pb={8}>
+                        pb={8}
+                        color={textColor}>
                         {content.map((project: Project) => (
                             <chakra.a href={project.url} key={project.name}>
                                 {project.name}
@@ -150,7 +173,8 @@ function TestimonialCard(props: TestimonialCardProps) {
                         fontFamily={'Oswald'}
                         fontWeight={'large'}
                         fontSize={'20px'}
-                        pb={8}>
+                        pb={8}
+                        color={textColor}>
                         {content}
                     </chakra.p>
                 )}
@@ -168,6 +192,9 @@ function TestimonialCard(props: TestimonialCardProps) {
 }
 
 export default function GridBlurredBackdrop() {
+    const textColor = useColorModeValue('#202023', '#f7fafc');
+    const iconColor = useColorModeValue('#1363d2', '#68217a');
+
     return (
         <Flex
             textAlign={'center'}
@@ -175,6 +202,10 @@ export default function GridBlurredBackdrop() {
             justifyContent={'center'}
             direction={'column'}
             width={'full'}>
+
+            <Box position="absolute" top={2} right={2}>
+                <ThemeToggleButton />
+            </Box>
 
             <Box width={{base: 'full', sm: 'lg', lg: 'xl'}} margin={'auto'}>
 
@@ -186,7 +217,7 @@ export default function GridBlurredBackdrop() {
                     fontFamily={'Nunito'}
                     fontWeight={'bold'}
                     fontSize={25}
-                    color={'#f7fafc'}>
+                    color={textColor}>
                     Bohdan Harabadzhyu | C# Developer
                 </chakra.h3>
 
@@ -195,7 +226,7 @@ export default function GridBlurredBackdrop() {
                     fontSize={22}
                     fontFamily={'Nunito'}
                     fontWeight={600}
-                    color={'#f7fafc'}>
+                    color={textColor}>
                     How to reach me ...
                     <Stack
                         aria-label='email info'
@@ -217,7 +248,7 @@ export default function GridBlurredBackdrop() {
                     width={'70%'}
                     fontFamily={'Inter'}
                     fontWeight={'medium'}
-                    color={'#f7fafc'}>
+                    color={textColor}>
                     ...a few facts about me...
                 </chakra.h2>
 
@@ -232,9 +263,9 @@ export default function GridBlurredBackdrop() {
                 ))}
             </SimpleGrid>
             <Box>
-                <Icon viewBox="0 12 40 35" mt={8} boxSize={6} color={'#68217a'}>
+                <Icon viewBox="0 12 40 35" mt={8} boxSize={6} color={iconColor}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
-                         stroke="#68217a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         stroke={iconColor} stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                          className="feather feather-code">
                         <polyline points="16 18 22 12 16 6"></polyline>
                         <polyline points="8 6 2 12 8 18"></polyline>

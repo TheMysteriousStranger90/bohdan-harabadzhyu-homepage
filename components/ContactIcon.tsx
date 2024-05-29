@@ -1,5 +1,5 @@
 ﻿import React from 'react'
-import {IconButton, useColorModeValue, useTheme} from '@chakra-ui/react'
+import { IconButton, useColorModeValue } from '@chakra-ui/react'
 
 type ContactIconProps = {
     label: string;
@@ -8,6 +8,8 @@ type ContactIconProps = {
 }
 
 const ContactIcon: React.FC<ContactIconProps> = ({label, link, icon}) => {
+    const buttonBackground = useColorModeValue('#1363d2', '#68217a');
+    const buttonColor = useColorModeValue('#202023', '#f7fafc');
 
     return (
         <IconButton
@@ -17,8 +19,8 @@ const ContactIcon: React.FC<ContactIconProps> = ({label, link, icon}) => {
             tabIndex={0}
             size='lg'
             colorScheme='grey'
-            color={'#f7fafc'}
-            backgroundColor={'#68217a'}
+            color={buttonColor}
+            backgroundColor={buttonBackground}
             href={link}
             target='_blank'
             rel='noopener'
