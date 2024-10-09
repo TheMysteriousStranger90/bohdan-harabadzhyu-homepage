@@ -49,11 +49,12 @@ const myinformation = [
         content: [
             { name: 'VoiceRecorder', url: 'https://github.com/TheMysteriousStranger90/VoiceRecorder' },
             { name: 'LogAnalyzerForWindows', url: 'https://github.com/TheMysteriousStranger90/LogAnalyzerForWindows' },
+            { name: 'FashionClothesAndTrends', url: 'https://github.com/TheMysteriousStranger90/FashionClothesAndTrends' },
             { name: 'SocialNetworkV2', url: 'https://github.com/TheMysteriousStranger90/SocialNetworkV2' },
             { name: 'CodeForum', url: 'https://github.com/TheMysteriousStranger90/CodeForum' },
             { name: 'TelegramBotForSpotify', url: 'https://github.com/TheMysteriousStranger90/TelegramBotForSpotify' },
             { name: 'ConsoleWebScraper', url: 'https://github.com/TheMysteriousStranger90/ConsoleWebScraper' },
-            // добавьте больше проектов здесь
+            { name: 'Cleanup.WindowsService', url: 'https://github.com/TheMysteriousStranger90/Cleanup.WindowsService' }
         ],
         logo: './terminal.svg',
     },
@@ -121,7 +122,7 @@ interface TestimonialCardProps {
 }
 
 function TestimonialCard(props: TestimonialCardProps) {
-    const {title, content, logo, index} = props;
+    const { title, content, logo, index } = props;
     const backgroundColor = useColorModeValue('#1363d2', '#68217a');
     const textColor = useColorModeValue('#202023', '#f7fafc');
 
@@ -129,28 +130,24 @@ function TestimonialCard(props: TestimonialCardProps) {
         <Flex
             boxShadow={'lg'}
             maxW={'600px'}
-            direction={{base: 'row', md: 'row'}}
+            direction={{ base: 'column', md: 'row' }}
             width={'full'}
             rounded={'xs'}
             p={10}
             justifyContent={'space-between'}
             position={'relative'}
             bg={backgroundColor}
-            _after={{}}
-            _before={{}}>
+            transition="transform 0.2s"
+            _hover={{ transform: 'scale(1.05)' }}
+        >
             <Flex
                 direction={'column'}
                 textAlign={'left'}
-                justifyContent={'space-between'}>
-
+                justifyContent={'space-between'}
+                flex="1"
+            >
                 <chakra.p fontFamily={'Open Sans'} fontWeight={'bold'} fontSize={22} color={textColor}>
                     {title}
-                    <chakra.span
-                        fontFamily={'Oswald'}
-                        fontWeight={'medium'}
-                        color={textColor}>
-                        {' '}
-                    </chakra.span>
                 </chakra.p>
 
                 {Array.isArray(content) ? (
@@ -159,14 +156,28 @@ function TestimonialCard(props: TestimonialCardProps) {
                         fontWeight={'large'}
                         fontSize={'20px'}
                         pb={8}
-                        color={textColor}>
-                        {content.map((project: Project) => (
-                            <chakra.a href={project.url} key={project.name}>
-                                {project.name}
-                            </chakra.a>
-                        )).reduce((prev: (JSX.Element | string)[], curr: JSX.Element, index: number) => {
-                            return index === 0 ? [curr] : [...prev, ', ', curr];
-                        }, [])}
+                        color={textColor}
+                        maxHeight={'160px'}
+                        overflowY={'auto'}
+                        css={{
+                            '&::-webkit-scrollbar': {
+                                width: '0px',
+                                height: '0px',
+                            },
+                            '&::-webkit-scrollbar-track': {
+                                background: 'transparent',
+                            },
+                            '&::-webkit-scrollbar-thumb': {
+                                background: 'transparent',
+                            },
+                        }}
+                    >
+                        {content.map((project: Project, idx: number) => (
+                            <chakra.span key={project.name}>
+                                <chakra.a href={project.url}>{project.name}</chakra.a>
+                                {idx < content.length - 1 && ', '}
+                            </chakra.span>
+                        ))}
                     </chakra.p>
                 ) : (
                     <chakra.p
@@ -174,18 +185,18 @@ function TestimonialCard(props: TestimonialCardProps) {
                         fontWeight={'large'}
                         fontSize={'20px'}
                         pb={8}
-                        color={textColor}>
+                        color={textColor}
+                    >
                         {content}
                     </chakra.p>
                 )}
-
             </Flex>
             <Avatar
                 src={logo}
                 height={'120px'}
                 width={'120px'}
-                alignSelf={'center'}
-                m={{base: '0 0 35px 0', md: '0 0 0 50px'}}
+                alignSelf={{ base: 'center', md: 'center' }}
+                m={{ base: '20px 0 0 0', md: '0 0 0 50px' }}
             />
         </Flex>
     );
@@ -194,6 +205,7 @@ function TestimonialCard(props: TestimonialCardProps) {
 export default function GridBlurredBackdrop() {
     const textColor = useColorModeValue('#202023', '#f7fafc');
     const iconColor = useColorModeValue('#1363d2', '#68217a');
+    const gradientBackground = useColorModeValue('linear(to-r, #ebf3fc, #d1e7f8)', 'linear(to-r, #202023, #2c2c2e)');
 
     return (
         <Flex
@@ -201,8 +213,11 @@ export default function GridBlurredBackdrop() {
             pt={10}
             justifyContent={'center'}
             direction={'column'}
-            width={'full'}>
-
+            width={'full'}
+            bgGradient={gradientBackground}
+            minH={'100vh'}
+            p={5}
+        >
             <Box position="absolute" top={2} right={2}>
                 <ThemeToggleButton />
             </Box>
@@ -265,7 +280,7 @@ export default function GridBlurredBackdrop() {
             <Box>
                 <Icon viewBox="0 12 40 35" mt={8} boxSize={6} color={iconColor}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
-                         stroke={iconColor} stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         stroke={iconColor} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
                          className="feather feather-code">
                         <polyline points="16 18 22 12 16 6"></polyline>
                         <polyline points="8 6 2 12 8 18"></polyline>
