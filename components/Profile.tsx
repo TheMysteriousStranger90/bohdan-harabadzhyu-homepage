@@ -22,7 +22,7 @@ const Profile: React.FC<ProfileProps> = ({ profileSrc }) => {
                 >
                     <Image
                         w='100%'
-                        maxW='200px'
+                        maxW='225px'
                         src={profileSrc}
                         borderRadius='full'
                         display="flex"

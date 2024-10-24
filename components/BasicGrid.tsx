@@ -2,7 +2,6 @@
     Avatar,
     Box,
     chakra,
-    Container,
     Flex,
     Icon,
     SimpleGrid, Stack,
@@ -13,7 +12,6 @@ import Profile from "./Profile";
 import {FiGithub, FiMail} from 'react-icons/fi';
 import {FaTelegram} from 'react-icons/fa';
 import ContactIcon from "./ContactIcon";
-
 import { IconButton, useColorMode } from '@chakra-ui/react';
 import { FaSun, FaMoon } from 'react-icons/fa';
 
@@ -54,7 +52,8 @@ const myinformation = [
             { name: 'CodeForum', url: 'https://github.com/TheMysteriousStranger90/CodeForum' },
             { name: 'TelegramBotForSpotify', url: 'https://github.com/TheMysteriousStranger90/TelegramBotForSpotify' },
             { name: 'ConsoleWebScraper', url: 'https://github.com/TheMysteriousStranger90/ConsoleWebScraper' },
-            { name: 'Cleanup.WindowsService', url: 'https://github.com/TheMysteriousStranger90/Cleanup.WindowsService' }
+            { name: 'Cleanup.WindowsService', url: 'https://github.com/TheMysteriousStranger90/Cleanup.WindowsService' },
+            { name: 'SaveEditorForPathologic2', url: 'https://www.nexusmods.com/pathologic2/mods/27' }
         ],
         logo: './terminal.svg',
     },
@@ -74,16 +73,6 @@ const basicInfo = (
             icon={<FaTelegram size={32}/>}
         />
 
-        <ContactIcon
-            label='github'
-            link={`https://github.com/TheMysteriousStranger90`}
-            icon={<FiGithub size={32}/>}
-        />
-    </>
-);
-
-const githubInfo = (
-    <>
         <ContactIcon
             label='github'
             link={`https://github.com/TheMysteriousStranger90`}

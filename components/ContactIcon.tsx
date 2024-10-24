@@ -7,9 +7,10 @@ type ContactIconProps = {
     icon: React.ReactElement;
 }
 
-const ContactIcon: React.FC<ContactIconProps> = ({label, link, icon}) => {
+const ContactIcon: React.FC<ContactIconProps> = ({ label, link, icon }) => {
     const buttonBackground = useColorModeValue('#1363d2', '#68217a');
     const buttonColor = useColorModeValue('#202023', '#f7fafc');
+    const hoverBackground = useColorModeValue('#ebf3fc', '#202023');
 
     return (
         <IconButton
@@ -26,8 +27,9 @@ const ContactIcon: React.FC<ContactIconProps> = ({label, link, icon}) => {
             rel='noopener'
             icon={icon}
             variant='ghost'
+            _hover={{ backgroundColor: hoverBackground }}
         />
     );
-}
+};
 
 export default ContactIcon;
