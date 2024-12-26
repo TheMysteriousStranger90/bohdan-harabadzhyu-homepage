@@ -5,6 +5,10 @@ const styles = {
     global: (props: StyleFunctionProps) => ({
         body: {
             bg: props.colorMode === 'dark' ? '#202023' : '#ebf3fc',
+            overflowX: 'hidden',
+        },
+        '*': {
+            boxSizing: 'border-box',
         },
     }),
 };

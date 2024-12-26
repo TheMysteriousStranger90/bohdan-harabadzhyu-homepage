@@ -4,16 +4,21 @@
     chakra,
     Flex,
     Icon,
-    SimpleGrid, Stack,
+    SimpleGrid,
+    Stack,
     useColorModeValue,
+    Menu,
+    MenuButton,
+    MenuList,
+    MenuItem,
 } from '@chakra-ui/react';
 import Footer from "./Footer";
 import Profile from "./Profile";
-import {FiGithub, FiMail} from 'react-icons/fi';
+import {FiGithub, FiMail, FiBookOpen} from 'react-icons/fi';
 import {FaTelegram} from 'react-icons/fa';
 import ContactIcon from "./ContactIcon";
-import { IconButton, useColorMode } from '@chakra-ui/react';
-import { FaSun, FaMoon } from 'react-icons/fa';
+import {IconButton, useColorMode} from '@chakra-ui/react';
+import {FaSun, FaMoon} from 'react-icons/fa';
 
 const myinformation = [
     {
@@ -45,15 +50,20 @@ const myinformation = [
         index: 4,
         title: 'SOME PROJECTS',
         content: [
-            { name: 'VoiceRecorder', url: 'https://github.com/TheMysteriousStranger90/VoiceRecorder' },
-            { name: 'LogAnalyzerForWindows', url: 'https://github.com/TheMysteriousStranger90/LogAnalyzerForWindows' },
-            { name: 'FashionClothesAndTrends', url: 'https://github.com/TheMysteriousStranger90/FashionClothesAndTrends' },
-            { name: 'SocialNetworkV2', url: 'https://github.com/TheMysteriousStranger90/SocialNetworkV2' },
-            { name: 'CodeForum', url: 'https://github.com/TheMysteriousStranger90/CodeForum' },
-            { name: 'TelegramBotForSpotify', url: 'https://github.com/TheMysteriousStranger90/TelegramBotForSpotify' },
-            { name: 'ConsoleWebScraper', url: 'https://github.com/TheMysteriousStranger90/ConsoleWebScraper' },
-            { name: 'Cleanup.WindowsService', url: 'https://github.com/TheMysteriousStranger90/Cleanup.WindowsService' },
-            { name: 'SaveEditorForPathologic2', url: 'https://www.nexusmods.com/pathologic2/mods/27' }
+            {name: 'WhisperFTPApp', url: 'https://github.com/TheMysteriousStranger90/WhisperFTPApp'},
+            {name: 'VoiceRecorder', url: 'https://github.com/TheMysteriousStranger90/VoiceRecorder'},
+            {name: 'LogAnalyzerForWindows', url: 'https://github.com/TheMysteriousStranger90/LogAnalyzerForWindows'},
+            {
+                name: 'FashionClothesAndTrends',
+                url: 'https://github.com/TheMysteriousStranger90/FashionClothesAndTrends'
+            },
+            {name: 'SocialNetworkV2', url: 'https://github.com/TheMysteriousStranger90/SocialNetworkV2'},
+            {name: 'CodeForum', url: 'https://github.com/TheMysteriousStranger90/CodeForum'},
+            {name: 'TelegramBotForSpotify', url: 'https://github.com/TheMysteriousStranger90/TelegramBotForSpotify'},
+            {name: 'ConsoleWebScraper', url: 'https://github.com/TheMysteriousStranger90/ConsoleWebScraper'},
+            {name: 'Cleanup.WindowsService', url: 'https://github.com/TheMysteriousStranger90/Cleanup.WindowsService'},
+            {name: 'FileConversionLibrary', url: 'https://www.nuget.org/packages/FileConversionLibrary'},
+            {name: 'SaveEditorForPathologic2', url: 'https://www.nexusmods.com/pathologic2/mods/27'}
         ],
         logo: './terminal.svg',
     },
@@ -82,14 +92,14 @@ const basicInfo = (
 );
 
 const ThemeToggleButton = () => {
-    const { colorMode, toggleColorMode } = useColorMode();
+    const {colorMode, toggleColorMode} = useColorMode();
     const buttonBackground = useColorModeValue('#1363d2', '#68217a');
     const buttonColor = useColorModeValue('#202023', '#f7fafc');
 
     return (
         <IconButton
             aria-label="Toggle theme"
-            icon={colorMode === 'light' ? <FaMoon /> : <FaSun />}
+            icon={colorMode === 'light' ? <FaMoon/> : <FaSun/>}
             onClick={toggleColorMode}
             color={buttonColor}
             backgroundColor={buttonBackground}
@@ -97,6 +107,76 @@ const ThemeToggleButton = () => {
     );
 };
 
+const LinksMenuButton = () => {
+    const buttonBackground = useColorModeValue('#1363d2', '#68217a');
+    const buttonColor = useColorModeValue('#202023', '#f7fafc');
+    const menuBackground = useColorModeValue('#ebf3fc', '#2c2c2e');
+    const borderColor = useColorModeValue('#e2e8f0', '#4a5568');
+
+    return (
+        <Menu>
+            <MenuButton
+                as={IconButton}
+                aria-label="Links Menu"
+                icon={<FiBookOpen size={20} />}
+                color={buttonColor}
+                backgroundColor={buttonBackground}
+            />
+            <MenuList p={1} minW="auto" bg={menuBackground}>
+                <MenuItem
+                    as="a"
+                    href="https://dev.to/themysteriousstranger90"
+                    target="_blank"
+                    py={2}
+                    px={3}
+                    lineHeight="1.4"
+                    minH="36px"
+                    display="flex"
+                    alignItems="center"
+                >
+                    <Box
+                        as="img"
+                        src="./devdotto.svg"
+                        alt="Dev.to"
+                        borderRadius="md"
+                        border="1px solid"
+                        borderColor={borderColor}
+                        p={1}
+                        mr={2}
+                        width="30px"  // Reduced width
+                        height="30px" // Reduced height
+                    />
+                    Dev.to
+                </MenuItem>
+                <MenuItem
+                    as="a"
+                    href="https://medium.com/@bohdan.harabadzhyu"
+                    target="_blank"
+                    py={2}
+                    px={3}
+                    lineHeight="1.4"
+                    minH="36px"
+                    display="flex"
+                    alignItems="center"
+                >
+                    <Box
+                        as="img"
+                        src="./medium.svg"
+                        alt="Medium"
+                        borderRadius="md"
+                        border="1px solid"
+                        borderColor={borderColor}
+                        p={1}
+                        mr={2}
+                        width="30px"
+                        height="30px"
+                    />
+                    Medium
+                </MenuItem>
+            </MenuList>
+        </Menu>
+    );
+};
 
 interface Project {
     name: string;
@@ -114,6 +194,7 @@ function TestimonialCard(props: TestimonialCardProps) {
     const { title, content, logo, index } = props;
     const backgroundColor = useColorModeValue('#1363d2', '#68217a');
     const textColor = useColorModeValue('#202023', '#f7fafc');
+    const linkHoverColor = useColorModeValue('#f7fafc', '#202023');
 
     return (
         <Flex
@@ -163,7 +244,16 @@ function TestimonialCard(props: TestimonialCardProps) {
                     >
                         {content.map((project: Project, idx: number) => (
                             <chakra.span key={project.name}>
-                                <chakra.a href={project.url}>{project.name}</chakra.a>
+                                <chakra.a
+                                    href={project.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    _hover={{
+                                        color: linkHoverColor,
+                                    }}
+                                >
+                                    {project.name}
+                                </chakra.a>
                                 {idx < content.length - 1 && ', '}
                             </chakra.span>
                         ))}
@@ -207,11 +297,15 @@ export default function GridBlurredBackdrop() {
             minH={'100vh'}
             p={5}
         >
+
             <Box position="absolute" top={2} right={2}>
-                <ThemeToggleButton />
+                <Stack direction="row" spacing={4}>
+                    <ThemeToggleButton />
+                    <LinksMenuButton />
+                </Stack>
             </Box>
 
-            <Box width={{base: 'full', sm: 'lg', lg: 'xl'}} margin={'auto'}>
+            <Box width={{ base: 'full', sm: 'lg', lg: 'xl' }} margin={'auto'}>
 
                 <Profile
                     profileSrc='./Photo.jpg'
@@ -258,7 +352,7 @@ export default function GridBlurredBackdrop() {
 
             </Box>
             <SimpleGrid
-                columns={{base: 1, xl: 2}}
+                columns={{ base: 1, xl: 2 }}
                 spacing={'20'}
                 mt={16}
                 mx={'auto'}>
