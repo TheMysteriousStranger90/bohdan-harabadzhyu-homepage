@@ -57,6 +57,7 @@ const myinformation = [
                 name: 'FashionClothesAndTrends',
                 url: 'https://github.com/TheMysteriousStranger90/FashionClothesAndTrends'
             },
+            {name: 'TheatreProjectMicroservices', url: 'https://github.com/TheMysteriousStranger90/TheatreProjectMicroservices'},
             {name: 'SocialNetworkV2', url: 'https://github.com/TheMysteriousStranger90/SocialNetworkV2'},
             {name: 'CodeForum', url: 'https://github.com/TheMysteriousStranger90/CodeForum'},
             {name: 'TelegramBotForSpotify', url: 'https://github.com/TheMysteriousStranger90/TelegramBotForSpotify'},
