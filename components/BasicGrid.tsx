@@ -61,6 +61,7 @@ const myinformation = [
             {name: 'SocialNetworkV2', url: 'https://github.com/TheMysteriousStranger90/SocialNetworkV2'},
             {name: 'CodeForum', url: 'https://github.com/TheMysteriousStranger90/CodeForum'},
             {name: 'TelegramBotForSpotify', url: 'https://github.com/TheMysteriousStranger90/TelegramBotForSpotify'},
+            {name: 'MedicalApp', url: 'https://github.com/TheMysteriousStranger90/MedicalApp'},
             {name: 'ConsoleWebScraper', url: 'https://github.com/TheMysteriousStranger90/ConsoleWebScraper'},
             {name: 'Cleanup.WindowsService', url: 'https://github.com/TheMysteriousStranger90/Cleanup.WindowsService'},
             {name: 'FileConversionLibrary', url: 'https://www.nuget.org/packages/FileConversionLibrary'},
