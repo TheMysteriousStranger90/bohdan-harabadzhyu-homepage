@@ -62,6 +62,7 @@ const myinformation = [
             {name: 'CodeForum', url: 'https://github.com/TheMysteriousStranger90/CodeForum'},
             {name: 'TelegramBotForSpotify', url: 'https://github.com/TheMysteriousStranger90/TelegramBotForSpotify'},
             {name: 'MedicalApp', url: 'https://github.com/TheMysteriousStranger90/MedicalApp'},
+            {name: 'TheSailOS', url: 'https://github.com/TheMysteriousStranger90/TheSailOS'},
             {name: 'ConsoleWebScraper', url: 'https://github.com/TheMysteriousStranger90/ConsoleWebScraper'},
             {name: 'Cleanup.WindowsService', url: 'https://github.com/TheMysteriousStranger90/Cleanup.WindowsService'},
             {name: 'FileConversionLibrary', url: 'https://www.nuget.org/packages/FileConversionLibrary'},
