@@ -66,7 +66,8 @@ const myinformation = [
             {name: 'ConsoleWebScraper', url: 'https://github.com/TheMysteriousStranger90/ConsoleWebScraper'},
             {name: 'Cleanup.WindowsService', url: 'https://github.com/TheMysteriousStranger90/Cleanup.WindowsService'},
             {name: 'FileConversionLibrary', url: 'https://www.nuget.org/packages/FileConversionLibrary'},
-            {name: 'SaveEditorForPathologic2', url: 'https://www.nexusmods.com/pathologic2/mods/27'}
+            {name: 'SaveEditorForPathologic2', url: 'https://www.nexusmods.com/pathologic2/mods/27'},
+            {name: 'TheLighthouseWavesPlayer', url: 'https://github.com/walk-away/TheLighthouseWavesPlayer'}
         ],
         logo: './terminal.svg',
     },
