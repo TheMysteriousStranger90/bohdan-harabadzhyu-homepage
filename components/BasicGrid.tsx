@@ -42,7 +42,7 @@ const myinformation = [
         index: 3,
         title: 'SKILLS',
         content:
-            '|| Programming languages: C#, TypeScript, SQL || ' + 'Frameworks: ASP.NET Core, Entity Framework, Angular, Avalonia UI || ' + 'Database: MSSQL || ',
+            '|| Programming languages: C#, TypeScript, SQL || ' + 'Frameworks: ASP.NET Core, Entity Framework, Blazor, Angular, Avalonia UI || ' + 'Database: MSSQL || ',
         logo:
             './cpu.svg',
     },
@@ -58,7 +58,7 @@ const myinformation = [
                 url: 'https://github.com/TheMysteriousStranger90/FashionClothesAndTrends'
             },
             {name: 'TheatreProjectMicroservices', url: 'https://github.com/TheMysteriousStranger90/TheatreProjectMicroservices'},
-            {name: 'SocialNetworkV2', url: 'https://github.com/TheMysteriousStranger90/SocialNetworkV2'},
+            {name: 'ArtGallery', url: 'https://github.com/TheMysteriousStranger90/ArtGallery'},
             {name: 'CodeForum', url: 'https://github.com/TheMysteriousStranger90/CodeForum'},
             {name: 'TelegramBotForSpotify', url: 'https://github.com/TheMysteriousStranger90/TelegramBotForSpotify'},
             {name: 'MedicalApp', url: 'https://github.com/TheMysteriousStranger90/MedicalApp'},
