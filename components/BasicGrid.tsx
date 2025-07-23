@@ -68,7 +68,8 @@ const myinformation = [
             {name: 'FileConversionLibrary', url: 'https://www.nuget.org/packages/FileConversionLibrary'},
             {name: 'SaveEditorForPathologic2', url: 'https://www.nexusmods.com/pathologic2/mods/27'},
             {name: 'TheLighthouseWavesPlayer', url: 'https://github.com/walk-away/TheLighthouseWavesPlayer'},
-            {name: 'AzureSpeechProject', url: 'https://github.com/TheMysteriousStranger90/AzureSpeechProject'}
+            {name: 'AzureSpeechProject', url: 'https://github.com/TheMysteriousStranger90/AzureSpeechProject'},
+            {name: 'TelegramBotForGitHub', url: 'https://github.com/TheMysteriousStranger90/TelegramBotForGitHub'}
         ],
         logo: './terminal.svg',
     },
