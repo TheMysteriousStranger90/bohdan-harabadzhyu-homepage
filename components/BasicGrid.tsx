@@ -69,7 +69,8 @@ const myinformation = [
             {name: 'SaveEditorForPathologic2', url: 'https://www.nexusmods.com/pathologic2/mods/27'},
             {name: 'TheLighthouseWavesPlayer', url: 'https://github.com/walk-away/TheLighthouseWavesPlayer'},
             {name: 'AzureSpeechProject', url: 'https://github.com/TheMysteriousStranger90/AzureSpeechProject'},
-            {name: 'TelegramBotForGitHub', url: 'https://github.com/TheMysteriousStranger90/TelegramBotForGitHub'}
+            {name: 'TelegramBotForGitHub', url: 'https://github.com/TheMysteriousStranger90/TelegramBotForGitHub'},
+            {name: 'MusicEmbersFire', url: 'https://youtu.be/8eKxZsZwIU8'}
         ],
         logo: './terminal.svg',
     },
