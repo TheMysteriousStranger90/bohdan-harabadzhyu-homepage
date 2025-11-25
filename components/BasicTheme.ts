@@ -3,6 +3,9 @@ import type {StyleFunctionProps} from '@chakra-ui/styled-system';
 
 const styles = {
     global: (props: StyleFunctionProps) => ({
+        html: {
+            overflowX: 'hidden',
+        },
         body: {
             bg: props.colorMode === 'dark' ? '#202023' : '#ebf3fc',
             overflowX: 'hidden',
