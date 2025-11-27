@@ -50,13 +50,11 @@ const myinformation = [
         index: 4,
         title: 'SOME PROJECTS',
         content: [
+            {name: 'AzioVoiceRecorder', url: 'https://apps.microsoft.com/detail/9PP795T0KSFP'},
+            {name: 'AzioSpeech', url: 'https://apps.microsoft.com/detail/9PFV5DG73198'},
             {name: 'WhisperFTPApp', url: 'https://github.com/TheMysteriousStranger90/WhisperFTPApp'},
-            {name: 'VoiceRecorder', url: 'https://github.com/TheMysteriousStranger90/VoiceRecorder'},
             {name: 'LogAnalyzerForWindows', url: 'https://github.com/TheMysteriousStranger90/LogAnalyzerForWindows'},
-            {
-                name: 'FashionClothesAndTrends',
-                url: 'https://github.com/TheMysteriousStranger90/FashionClothesAndTrends'
-            },
+            {name: 'FashionClothesAndTrends', url: 'https://github.com/TheMysteriousStranger90/FashionClothesAndTrends'},
             {name: 'TheatreProjectMicroservices', url: 'https://github.com/TheMysteriousStranger90/TheatreProjectMicroservices'},
             {name: 'ArtGallery', url: 'https://github.com/TheMysteriousStranger90/ArtGallery'},
             {name: 'CodeForum', url: 'https://github.com/TheMysteriousStranger90/CodeForum'},
@@ -69,7 +67,6 @@ const myinformation = [
             {name: 'SaveEditorForPathologic2', url: 'https://www.nexusmods.com/pathologic2/mods/27'},
             {name: 'TheLighthouseWavesPlayer', url: 'https://github.com/walk-away/TheLighthouseWavesPlayer'},
             {name: 'TelegramBotForGitHub', url: 'https://github.com/TheMysteriousStranger90/TelegramBotForGitHub'},
-            {name: 'AzioSpeech', url: 'https://apps.microsoft.com/detail/9PFV5DG73198'},
             {name: 'MusicEmbersFire', url: 'https://youtu.be/8eKxZsZwIU8'}
         ],
         logo: './terminal.svg',
