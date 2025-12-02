@@ -52,7 +52,7 @@ const myinformation = [
         content: [
             {name: 'AzioVoiceRecorder', url: 'https://apps.microsoft.com/detail/9PP795T0KSFP'},
             {name: 'AzioSpeech', url: 'https://apps.microsoft.com/detail/9PFV5DG73198'},
-            {name: 'WhisperFTPApp', url: 'https://github.com/TheMysteriousStranger90/WhisperFTPApp'},
+            {name: 'AzioWhisperFTP', url: 'https://apps.microsoft.com/detail/9N73GM6JPBXZ'},
             {name: 'LogAnalyzerForWindows', url: 'https://github.com/TheMysteriousStranger90/LogAnalyzerForWindows'},
             {name: 'FashionClothesAndTrends', url: 'https://github.com/TheMysteriousStranger90/FashionClothesAndTrends'},
             {name: 'TheatreProjectMicroservices', url: 'https://github.com/TheMysteriousStranger90/TheatreProjectMicroservices'},
