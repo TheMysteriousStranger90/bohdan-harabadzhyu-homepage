@@ -14,7 +14,27 @@ const LinksMenuButton: React.FC = () => {
   const buttonBackground = useColorModeValue('#1363d2', '#68217a');
   const buttonColor = useColorModeValue('#202023', '#f7fafc');
   const menuBackground = useColorModeValue('#ebf3fc', '#2c2c2e');
+  const menuItemBg = useColorModeValue('#ebf3fc', '#2c2c2e');
+  const menuItemHoverBg = useColorModeValue('#b6d6fe', '#4a2060');
+  const menuItemText = useColorModeValue('#202023', '#f7fafc');
   const borderColor = useColorModeValue('#e2e8f0', '#4a5568');
+
+  const itemProps = {
+    as: 'a' as const,
+    target: '_blank',
+    rel: 'noopener noreferrer',
+    py: 2,
+    px: 3,
+    lineHeight: '1.4',
+    minH: '36px',
+    display: 'flex',
+    alignItems: 'center',
+    bg: menuItemBg,
+    color: menuItemText,
+    _hover: { bg: menuItemHoverBg },
+    _focus: { bg: menuItemHoverBg, boxShadow: 'none' },
+    _active: { bg: menuItemHoverBg },
+  };
 
   return (
     <Menu>
@@ -25,28 +45,40 @@ const LinksMenuButton: React.FC = () => {
         color={buttonColor}
         backgroundColor={buttonBackground}
       />
-      <MenuList p={1} minW="auto" bg={menuBackground}>
+      <MenuList p={1} minW="auto" bg={menuBackground} borderColor={borderColor}>
         <MenuItem
-          as="a"
+          {...itemProps}
           href="https://dev.to/themysteriousstranger90"
-          target="_blank"
-          rel="noopener noreferrer"
-          py={2} px={3} lineHeight="1.4" minH="36px" display="flex" alignItems="center"
         >
-          <Box as="img" src="./devdotto.svg" alt="Dev.to" borderRadius="md"
-            border="1px solid" borderColor={borderColor} p={1} mr={2} width="30px" height="30px"
+          <Box
+            as="img"
+            src="./devdotto.svg"
+            alt="Dev.to"
+            borderRadius="md"
+            border="1px solid"
+            borderColor={borderColor}
+            p={1}
+            mr={2}
+            width="30px"
+            height="30px"
           />
           Dev.to
         </MenuItem>
         <MenuItem
-          as="a"
+          {...itemProps}
           href="https://medium.com/@bohdan.harabadzhyu"
-          target="_blank"
-          rel="noopener noreferrer"
-          py={2} px={3} lineHeight="1.4" minH="36px" display="flex" alignItems="center"
         >
-          <Box as="img" src="./medium.svg" alt="Medium" borderRadius="md"
-            border="1px solid" borderColor={borderColor} p={1} mr={2} width="30px" height="30px"
+          <Box
+            as="img"
+            src="./medium.svg"
+            alt="Medium"
+            borderRadius="md"
+            border="1px solid"
+            borderColor={borderColor}
+            p={1}
+            mr={2}
+            width="30px"
+            height="30px"
           />
           Medium
         </MenuItem>
