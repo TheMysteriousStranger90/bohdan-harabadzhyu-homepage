@@ -16,6 +16,7 @@ import InfoCard from '@/components/sections/InfoCard';
 import ContactIcon from '@/components/ui/ContactIcon';
 import ThemeToggleButton from '@/components/ui/ThemeToggleButton';
 import LinksMenuButton from '@/components/ui/LinksMenuButton';
+import YouTubeButton from '@/components/ui/YouTubeButton';
 import { MY_INFORMATION } from '@/data/myInformation';
 
 const HeroSection: React.FC = () => {
@@ -40,6 +41,7 @@ const HeroSection: React.FC = () => {
       <Box position="absolute" top={2} right={2}>
         <Stack direction="row" spacing={4}>
           <ThemeToggleButton />
+          <YouTubeButton />
           <LinksMenuButton />
         </Stack>
       </Box>

@@ -51,16 +51,9 @@ const LinksMenuButton: React.FC = () => {
           href="https://dev.to/themysteriousstranger90"
         >
           <Box
-            as="img"
-            src="./devdotto.svg"
-            alt="Dev.to"
-            borderRadius="md"
-            border="1px solid"
-            borderColor={borderColor}
-            p={1}
-            mr={2}
-            width="30px"
-            height="30px"
+            as="img" src="./devdotto.svg" alt="Dev.to"
+            borderRadius="md" border="1px solid" borderColor={borderColor}
+            p={1} mr={2} width="30px" height="30px"
           />
           Dev.to
         </MenuItem>
@@ -69,16 +62,9 @@ const LinksMenuButton: React.FC = () => {
           href="https://medium.com/@bohdan.harabadzhyu"
         >
           <Box
-            as="img"
-            src="./medium.svg"
-            alt="Medium"
-            borderRadius="md"
-            border="1px solid"
-            borderColor={borderColor}
-            p={1}
-            mr={2}
-            width="30px"
-            height="30px"
+            as="img" src="./medium.svg" alt="Medium"
+            borderRadius="md" border="1px solid" borderColor={borderColor}
+            p={1} mr={2} width="30px" height="30px"
           />
           Medium
         </MenuItem>
