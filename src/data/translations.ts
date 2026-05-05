@@ -1,0 +1,40 @@
+export type Language = 'en' | 'ru';
+
+const translations = {
+  en: {
+    heroSubtitle: 'C# Developer',
+    reachMe: 'How to reach me ...',
+    factsAboutMe: '...a few facts about me...',
+    footerRights: 'All rights reserved.',
+    infoTitles: {
+      aboutMe: 'ABOUT ME',
+      education: 'EDUCATION',
+      skills: 'SKILLS',
+      personalProjects: 'PERSONAL PROJECTS',
+    },
+    infoContent: {
+      aboutMe: "I'm a C# / .NET developer who enjoys turning complex requirements into clean, maintainable solutions. My background spans microservices, REST APIs and desktop apps — including several titles published in the Microsoft Store. I'm always looking for opportunities to build something meaningful.",
+      education: '|| First Higher Education - V.O. Sukhomlynskyi Mykolaiv National University (Ethnology. Obtained qualification: Master Degree. 2017) || Second Higher Education - Admiral Makarov National University of Shipbuilding (Computer sciences. Obtained qualification: Bachelor Degree. 2021) ||',
+      skills: '|| Programming languages: C#, TypeScript, SQL || Frameworks: ASP.NET Core, Entity Framework, Blazor, Angular, Avalonia UI || Database: MSSQL ||',
+    },
+  },
+  ru: {
+    heroSubtitle: 'C# Разработчик',
+    reachMe: 'Как связаться со мной ...',
+    factsAboutMe: '...несколько фактов обо мне...',
+    footerRights: 'Все права защищены.',
+    infoTitles: {
+      aboutMe: 'ОБО МНЕ',
+      education: 'ОБРАЗОВАНИЕ',
+      skills: 'НАВЫКИ',
+      personalProjects: 'ЛИЧНЫЕ ПРОЕКТЫ',
+    },
+    infoContent: {
+      aboutMe: 'Я C# / .NET разработчик, которому нравится превращать сложные требования в чистые и поддерживаемые решения. Мой опыт охватывает микросервисы, REST API и настольные приложения — включая несколько проектов, опубликованных в Microsoft Store. Я всегда ищу возможности создавать что-то значимое.',
+      education: '|| Первое высшее образование - Николаевский национальный университет им. В.А. Сухомлинского (Этнология. Квалификация: Магистр. 2017) || Второе высшее образование - Национальный университет кораблестроения им. адмирала Макарова (Компьютерные науки. Квалификация: Бакалавр. 2021) ||',
+      skills: '|| Языки программирования: C#, TypeScript, SQL || Фреймворки: ASP.NET Core, Entity Framework, Blazor, Angular, Avalonia UI || База данных: MSSQL ||',
+    },
+  },
+} as const;
+
+export default translations;

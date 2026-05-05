@@ -3,10 +3,13 @@ import { type AppProps } from 'next/app';
 import { ChakraProvider } from '@chakra-ui/react';
 import theme from '@/theme';
 import '@/styles/globals.css';
+import { LanguageProvider } from '@/context/LanguageContext';
 
 const App: React.FC<AppProps> = ({ Component, pageProps }) => (
   <ChakraProvider theme={theme}>
-    <Component {...pageProps} />
+    <LanguageProvider>
+      <Component {...pageProps} />
+    </LanguageProvider>
   </ChakraProvider>
 );
 
