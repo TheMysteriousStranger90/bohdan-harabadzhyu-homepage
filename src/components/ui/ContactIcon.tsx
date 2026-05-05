@@ -1,0 +1,35 @@
+import React from 'react';
+import { IconButton, useColorModeValue } from '@chakra-ui/react';
+
+interface ContactIconProps {
+  label: string;
+  link: string;
+  icon: React.ReactElement;
+}
+
+const ContactIcon: React.FC<ContactIconProps> = ({ label, link, icon }) => {
+  const buttonBackground = useColorModeValue('#1363d2', '#68217a');
+  const buttonColor = useColorModeValue('#202023', '#f7fafc');
+  const hoverBackground = useColorModeValue('#ebf3fc', '#202023');
+
+  return (
+    <IconButton
+      as="a"
+      aria-label={label}
+      isRound
+      tabIndex={0}
+      size="lg"
+      colorScheme="grey"
+      color={buttonColor}
+      backgroundColor={buttonBackground}
+      href={link}
+      target="_blank"
+      rel="noopener noreferrer"
+      icon={icon}
+      variant="ghost"
+      _hover={{ backgroundColor: hoverBackground }}
+    />
+  );
+};
+
+export default ContactIcon;
