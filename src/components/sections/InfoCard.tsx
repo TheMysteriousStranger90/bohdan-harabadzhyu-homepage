@@ -6,6 +6,7 @@ const InfoCard: React.FC<InfoItem> = ({ title, content, logo }) => {
   const backgroundColor = useColorModeValue('#1363d2', '#68217a');
   const textColor = useColorModeValue('#202023', '#f7fafc');
   const linkHoverColor = useColorModeValue('#f7fafc', '#202023');
+  const iconFilter = useColorModeValue('none', 'invert(1)');
 
   return (
     <Flex
@@ -68,6 +69,7 @@ const InfoCard: React.FC<InfoItem> = ({ title, content, logo }) => {
         width="120px"
         alignSelf={{ base: 'center', md: 'center' }}
         m={{ base: '20px 0 0 0', md: '0 0 0 50px' }}
+        sx={{ filter: iconFilter }}
       />
     </Flex>
   );
