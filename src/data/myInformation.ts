@@ -14,7 +14,7 @@ export const MY_INFORMATION: InfoItem[] = [
   {
     index: 1,
     title: 'ABOUT ME',
-    content: 'I am passionate about C# development and focus on creating applications using ASP.NET MVC, .NET Core and Web API. I aspire to combine my passion for programming and technology to create engaging web applications. I am also fond of classical music, fiction literature and English lessons.',
+    content: 'I\'m a C# / .NET developer who enjoys turning complex requirements into clean, maintainable solutions. My background spans microservices, REST APIs and desktop apps — including several titles published in the Microsoft Store. I\'m always looking for opportunities to build something meaningful.',
     logo: './smile.svg',
   },
   {
