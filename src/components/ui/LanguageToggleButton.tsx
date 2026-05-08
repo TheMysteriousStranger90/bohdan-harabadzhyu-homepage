@@ -19,7 +19,6 @@ const LanguageToggleButton: React.FC = () => {
       minW="2.5rem"
       h="2.5rem"
       px={2}
-      _hover={{ opacity: 0.85, backgroundColor: buttonBackground }}
     >
       {language === 'en' ? 'RU' : 'EN'}
     </Button>
