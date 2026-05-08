@@ -68,6 +68,17 @@ const LinksMenuButton: React.FC = () => {
           />
           Medium
         </MenuItem>
+        <MenuItem
+          {...itemProps}
+          href="https://habr.com/ru/users/TheMysteriousStranger90/articles/sandbox/"
+        >
+          <Box
+            as="img" src="./habr.svg" alt="Medium"
+            borderRadius="md" border="1px solid" borderColor={borderColor}
+            p={1} mr={2} width="30px" height="30px"
+          />
+          Хабр
+        </MenuItem>
       </MenuList>
     </Menu>
   );
