@@ -64,11 +64,11 @@ const HeroSection: React.FC = () => {
       <Box width={{ base: 'full', sm: 'lg', lg: 'xl' }} margin="auto">
         <ProfileSection profileSrc="./Photo.jpg" />
 
-        <chakra.h3 fontFamily="Nunito" fontWeight="bold" fontSize={25} color={textColor}>
+        <chakra.h3 fontFamily="var(--font-lora)" fontWeight="bold" fontSize={25} color={textColor}>
           Bohdan Harabadzhyu | {t.heroSubtitle}
         </chakra.h3>
 
-        <chakra.h1 py={6} fontSize={22} fontFamily="Nunito" fontWeight={600} color={textColor}>
+        <chakra.h1 py={6} fontSize={22} fontFamily="var(--font-lora)" fontWeight={600} color={textColor}>
           {t.reachMe}
           <Stack
             aria-label="Contact information"
@@ -102,7 +102,7 @@ const HeroSection: React.FC = () => {
         <chakra.h2
           margin="auto"
           width="70%"
-          fontFamily="Inter"
+          fontFamily="var(--font-lora)"
           fontWeight="medium"
           color={textColor}
         >

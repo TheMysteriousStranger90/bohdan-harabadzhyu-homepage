@@ -13,7 +13,7 @@ const LanguageToggleButton: React.FC = () => {
       onClick={toggleLanguage}
       color={buttonColor}
       backgroundColor={buttonBackground}
-      fontFamily="Nunito"
+      fontFamily="var(--font-lora)"
       fontWeight="bold"
       fontSize="sm"
       minW="2.5rem"

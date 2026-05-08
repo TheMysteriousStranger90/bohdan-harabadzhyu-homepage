@@ -23,6 +23,7 @@ const LinksMenuButton: React.FC = () => {
     as: 'a' as const,
     target: '_blank',
     rel: 'noopener noreferrer',
+    fontFamily: "var(--font-lora)",
     py: 2,
     px: 3,
     lineHeight: '1.4',
