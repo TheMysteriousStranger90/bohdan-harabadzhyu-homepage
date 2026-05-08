@@ -22,17 +22,16 @@ const InfoCard: React.FC<InfoItem> = ({ title, content, logo }) => {
       transition="transform 0.2s"
       _hover={{ transform: 'scale(1.05)' }}
     >
-      <Flex direction="column" textAlign="left" justifyContent="space-between" flex="1">
-        <chakra.p fontFamily="Open Sans" fontWeight="bold" fontSize={22} color={textColor}>
+      <Flex direction="column" textAlign="left" justifyContent="flex-start" gap={4} flex="1">
+        <chakra.p fontFamily="var(--font-lora)" fontWeight="bold" fontSize={22} color={textColor}>
           {title}
         </chakra.p>
 
         {Array.isArray(content) ? (
           <chakra.p
-            fontFamily="Oswald"
+            fontFamily="var(--font-lora)"
             fontWeight="large"
             fontSize="20px"
-            pb={8}
             color={textColor}
             maxHeight="160px"
             overflowY="auto"
@@ -57,7 +56,7 @@ const InfoCard: React.FC<InfoItem> = ({ title, content, logo }) => {
             ))}
           </chakra.p>
         ) : (
-          <chakra.p fontFamily="Oswald" fontWeight="large" fontSize="20px" pb={8} color={textColor}>
+          <chakra.p fontFamily="var(--font-lora)" fontWeight="large" fontSize="20px" color={textColor}>
             {content}
           </chakra.p>
         )}

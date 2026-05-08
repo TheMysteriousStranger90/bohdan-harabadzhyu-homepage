@@ -33,8 +33,8 @@ const colors = {
 };
 
 const fonts = {
-  body: "'Segoe UI', sans-serif",
-  heading: "'Nunito', sans-serif",
+  body: "var(--font-lora), serif",
+  heading: "var(--font-lora), serif",
 };
 
 const components = {

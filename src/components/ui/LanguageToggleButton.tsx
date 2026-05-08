@@ -13,13 +13,12 @@ const LanguageToggleButton: React.FC = () => {
       onClick={toggleLanguage}
       color={buttonColor}
       backgroundColor={buttonBackground}
-      fontFamily="Nunito"
+      fontFamily="var(--font-lora)"
       fontWeight="bold"
       fontSize="sm"
       minW="2.5rem"
       h="2.5rem"
       px={2}
-      _hover={{ opacity: 0.85, backgroundColor: buttonBackground }}
     >
       {language === 'en' ? 'RU' : 'EN'}
     </Button>
