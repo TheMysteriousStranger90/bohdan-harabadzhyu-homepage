@@ -71,7 +71,7 @@ const LinksMenuButton: React.FC = () => {
         </MenuItem>
         <MenuItem
           {...itemProps}
-          href="https://habr.com/ru/users/TheMysteriousStranger90/articles/sandbox/"
+          href="https://habr.com/ru/users/TheMysteriousStranger90/articles/"
         >
           <Box
             as="img" src="./habr.svg" alt="Medium"

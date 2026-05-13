@@ -21,9 +21,21 @@ import YouTubeButton from '@/components/ui/YouTubeButton';
 import { MY_PROJECTS } from '@/data/myInformation';
 import type { InfoItem } from '@/data/myInformation';
 import { useLanguage } from '@/context/LanguageContext';
-import translations from '@/data/translations';
+import translations from '@/data/translations'
+import { AnimatePresence, motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
 
 const HeroSection: React.FC = () => {
+  const names = ['Bohdan Harabadzhyu', 'Bogdan Garabajiu'];
+  const [nameIndex, setNameIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setNameIndex(prev => (prev + 1) % names.length);
+    }, 7000);
+    return () => clearInterval(interval);
+  }, []);
+
   const { language } = useLanguage();
   const t = translations[language];
 
@@ -64,8 +76,26 @@ const HeroSection: React.FC = () => {
       <Box width={{ base: 'full', sm: 'lg', lg: 'xl' }} margin="auto">
         <ProfileSection profileSrc="./Photo.jpg" />
 
-        <chakra.h3 fontFamily="var(--font-lora)" fontWeight="bold" fontSize={25} color={textColor}>
-          Bohdan Harabadzhyu | {t.heroSubtitle}
+        <chakra.h3
+          fontFamily="var(--font-lora)"
+          fontWeight="bold"
+          fontSize={25}
+          color={textColor}
+          textAlign="center"
+        >
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={nameIndex}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.5 }}
+              style={{ display: 'inline-block' }}
+            >
+              {names[nameIndex]}
+            </motion.span>
+          </AnimatePresence>
+          {' | '}{t.heroSubtitle}
         </chakra.h3>
 
         <chakra.h1 py={6} fontSize={22} fontFamily="var(--font-lora)" fontWeight={600} color={textColor}>
