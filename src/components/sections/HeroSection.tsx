@@ -86,11 +86,11 @@ const HeroSection: React.FC = () => {
           <AnimatePresence mode="wait">
             <motion.span
               key={nameIndex}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
+              initial={{ opacity: 0, filter: 'blur(8px)' }}
+              animate={{ opacity: 1, filter: 'blur(0px)' }}
+              exit={{ opacity: 0, filter: 'blur(8px)' }}
               transition={{ duration: 0.5 }}
-              style={{ display: 'inline-block' }}
+              style={{ display: 'inline-flex', alignItems: 'center' }}
             >
               {names[nameIndex]}
             </motion.span>
