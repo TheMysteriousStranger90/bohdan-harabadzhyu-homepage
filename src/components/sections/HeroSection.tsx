@@ -32,7 +32,7 @@ const HeroSection: React.FC = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setNameIndex(prev => (prev + 1) % names.length);
-    }, 7000);
+    }, 10000);
     return () => clearInterval(interval);
   }, []);
 
