@@ -26,7 +26,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 
 const HeroSection: React.FC = () => {
-  const names = ['Bohdan Harabadzhyu', 'Bogdan Garabajiu'];
+  const names = ['Bohdan Harabadzhyu', 'Bogdan Garabagiu'];
   const [nameIndex, setNameIndex] = useState(0);
 
   useEffect(() => {
