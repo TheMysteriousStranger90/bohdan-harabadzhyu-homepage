@@ -6,9 +6,12 @@ import {
   Text,
   Collapse,
   VStack,
+  useColorModeValue,
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
-import { FiChevronUp, FiChevronDown } from 'react-icons/fi';
+import { FiChevronUp, FiChevronDown, FiPenTool, FiMusic } from 'react-icons/fi';
+import { useLanguage } from '@/context/LanguageContext';
+import translations from '@/data/translations';
 
 export interface Poem {
   id: number;
@@ -27,57 +30,70 @@ const ArtsSidebar: React.FC<ArtsSidebarProps> = ({ poems, selectedPoemId, onSele
   const [poemsOpen, setPoemsOpen] = useState(true);
   const [musicOpen, setMusicOpen] = useState(false);
 
+  const { language } = useLanguage();
+  const t = translations[language];
+
+  // Match main page color scheme
+  const sidebarBg = useColorModeValue('#d1e7f8', '#1a1a1e');
+  const borderColor = useColorModeValue('#93c5fd', '#2a2a2e');
+  const textColor = useColorModeValue('#202023', '#f7fafc');
+  const mutedText = useColorModeValue('#4b5563', '#9ca3af');
+  const hoverBg = useColorModeValue('rgba(19,99,210,0.07)', 'rgba(255,255,255,0.05)');
+  const selectedColor = useColorModeValue('#5b21b6', '#c084fc');
+  const selectedBg = useColorModeValue('rgba(91,33,182,0.08)', 'rgba(192,132,252,0.08)');
+  const chevronColor = useColorModeValue('#1363d2', '#68217a');
+
+  // Icon badge — same colors as ContactIcon
+  const iconBg = useColorModeValue('#1363d2', '#68217a');
+  const iconColor = useColorModeValue('#202023', '#f7fafc');
+
   return (
     <Box
       w={{ base: '200px', md: '240px' }}
       minH="100vh"
-      bg="#111113"
-      borderRight="1px solid #2a2a2e"
+      bg={sidebarBg}
+      borderRight={`1px solid ${borderColor}`}
       py={6}
       px={4}
       flexShrink={0}
       overflowY="auto"
     >
-      {/* Back navigation via Photo2 */}
-      <NextLink href="/" passHref>
+      {/* Photo2 — back to homepage (NextLink is the <a>, Box is <div>) */}
+      <NextLink href="/">
         <Box
-          as="a"
           display="block"
           cursor="pointer"
           mb={3}
           w="fit-content"
           mx="auto"
-          title="Вернуться на главную"
+          title={t.arts.backToMain}
         >
           <Image
             src="/Photo2.png"
-            alt="Богдан Харабаджю"
+            alt="Bohdan Harabadzhyu"
             borderRadius="full"
             w="80px"
             h="80px"
             objectFit="cover"
-            border="2px solid #7c3aed"
-            transition="border-color 0.2s, box-shadow 0.2s"
-            _hover={{
-              borderColor: '#a855f7',
-              boxShadow: '0 0 12px rgba(168, 85, 247, 0.5)',
-            }}
+            border={`2px solid ${iconBg}`}
+            transition="transform 0.2s, opacity 0.2s"
+            _hover={{ transform: 'scale(1.05)', opacity: 0.85 }}
           />
         </Box>
       </NextLink>
 
       <Text
-        color="white"
+        color={textColor}
         fontFamily="var(--font-lora)"
         fontSize="sm"
         fontWeight="600"
         textAlign="center"
         mb={6}
       >
-        Богдан Харабаджю
+        Bohdan Harabadzhyu
       </Text>
 
-      {/* СТИХИ section */}
+      {/* POEMS / СТИХИ section */}
       <Box mb={4}>
         <Flex
           align="center"
@@ -87,18 +103,40 @@ const ArtsSidebar: React.FC<ArtsSidebarProps> = ({ poems, selectedPoemId, onSele
           py={2}
           px={2}
           borderRadius="md"
-          _hover={{ bg: '#1e1e22' }}
+          _hover={{ bg: hoverBg }}
           userSelect="none"
         >
-          <Image src="/pen-tool.svg" alt="poems" w="18px" h="18px" filter="invert(60%) sepia(1) saturate(3) hue-rotate(230deg)" />
-          <Text color="white" fontFamily="var(--font-lora)" fontWeight="700" fontSize="sm" letterSpacing="wider" flex="1">
-            СТИХИ
+          {/* Round icon badge — matches ContactIcon style */}
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            w="34px"
+            h="34px"
+            borderRadius="full"
+            bg={iconBg}
+            color={iconColor}
+            flexShrink={0}
+          >
+            <FiPenTool size={15} />
+          </Box>
+          <Text
+            color={textColor}
+            fontFamily="var(--font-lora)"
+            fontWeight="700"
+            fontSize="sm"
+            letterSpacing="wider"
+            flex="1"
+          >
+            {t.arts.poems}
           </Text>
-          {poemsOpen ? <FiChevronUp color="#a78bfa" size={16} /> : <FiChevronDown color="#a78bfa" size={16} />}
+          {poemsOpen
+            ? <FiChevronUp color={chevronColor} size={16} />
+            : <FiChevronDown color={chevronColor} size={16} />}
         </Flex>
 
         <Collapse in={poemsOpen} animateOpacity>
-          <VStack align="stretch" spacing={0} pl={2}>
+          <VStack align="stretch" spacing={0} pl={2} mt={1}>
             {poems.map(poem => (
               <Text
                 key={poem.id}
@@ -108,11 +146,12 @@ const ArtsSidebar: React.FC<ArtsSidebarProps> = ({ poems, selectedPoemId, onSele
                 fontFamily="var(--font-lora)"
                 cursor="pointer"
                 borderRadius="md"
-                color={selectedPoemId === poem.id ? '#c084fc' : '#9ca3af'}
+                color={selectedPoemId === poem.id ? selectedColor : mutedText}
                 fontWeight={selectedPoemId === poem.id ? '600' : '400'}
-                borderLeft={selectedPoemId === poem.id ? '2px solid #c084fc' : '2px solid transparent'}
+                bg={selectedPoemId === poem.id ? selectedBg : 'transparent'}
+                borderLeft={`2px solid ${selectedPoemId === poem.id ? selectedColor : 'transparent'}`}
                 transition="all 0.15s"
-                _hover={{ color: '#e9d5ff', bg: '#1e1e22' }}
+                _hover={{ color: textColor, bg: hoverBg }}
                 onClick={() => onSelectPoem(poem)}
                 noOfLines={2}
               >
@@ -123,7 +162,7 @@ const ArtsSidebar: React.FC<ArtsSidebarProps> = ({ poems, selectedPoemId, onSele
         </Collapse>
       </Box>
 
-      {/* МУЗЫКА section */}
+      {/* MUSIC / МУЗЫКА section */}
       <Box>
         <Flex
           align="center"
@@ -133,20 +172,47 @@ const ArtsSidebar: React.FC<ArtsSidebarProps> = ({ poems, selectedPoemId, onSele
           py={2}
           px={2}
           borderRadius="md"
-          _hover={{ bg: '#1e1e22' }}
+          _hover={{ bg: hoverBg }}
           userSelect="none"
         >
-          <Image src="/music.svg" alt="music" w="18px" h="18px" filter="invert(60%) sepia(1) saturate(3) hue-rotate(230deg)" />
-          <Text color="white" fontFamily="var(--font-lora)" fontWeight="700" fontSize="sm" letterSpacing="wider" flex="1">
-            МУЗЫКА
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            w="34px"
+            h="34px"
+            borderRadius="full"
+            bg={iconBg}
+            color={iconColor}
+            flexShrink={0}
+          >
+            <FiMusic size={15} />
+          </Box>
+          <Text
+            color={textColor}
+            fontFamily="var(--font-lora)"
+            fontWeight="700"
+            fontSize="sm"
+            letterSpacing="wider"
+            flex="1"
+          >
+            {t.arts.music}
           </Text>
-          {musicOpen ? <FiChevronUp color="#a78bfa" size={16} /> : <FiChevronDown color="#a78bfa" size={16} />}
+          {musicOpen
+            ? <FiChevronUp color={chevronColor} size={16} />
+            : <FiChevronDown color={chevronColor} size={16} />}
         </Flex>
 
         <Collapse in={musicOpen} animateOpacity>
           <Box pl={4} pr={2} py={3}>
-            <Text color="#6b7280" fontFamily="var(--font-lora)" fontSize="xs" lineHeight="tall" fontStyle="italic">
-              В будущем здесь появится музыка из SoundCloud
+            <Text
+              color={mutedText}
+              fontFamily="var(--font-lora)"
+              fontSize="xs"
+              lineHeight="tall"
+              fontStyle="italic"
+            >
+              {t.arts.musicComingSoon}
             </Text>
           </Box>
         </Collapse>

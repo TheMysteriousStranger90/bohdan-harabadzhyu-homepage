@@ -17,6 +17,13 @@ const translations = {
       education: '|| First Higher Education - V.O. Sukhomlynskyi Mykolaiv National University (Ethnology. Obtained qualification: Master Degree. 2017) || Second Higher Education - Admiral Makarov National University of Shipbuilding (Computer sciences. Obtained qualification: Bachelor Degree. 2021) ||',
       skills: '|| Programming languages: C#, TypeScript, SQL || Frameworks: ASP.NET Core, Entity Framework, Blazor, Angular, Avalonia UI || Database: MSSQL ||',
     },
+    arts: {
+      poems: 'POEMS',
+      music: 'MUSIC',
+      musicComingSoon: 'Music from SoundCloud will appear here in the future',
+      backToMain: 'Back to main page',
+      readOn: 'Read on poeziya.ru',
+    },
   },
   ru: {
     heroSubtitle: 'C# Разработчик',
@@ -33,6 +40,13 @@ const translations = {
       aboutMe: 'Я C# / .NET разработчик, которому нравится превращать сложные требования в чистые и поддерживаемые решения. Мой опыт охватывает микросервисы, REST API и настольные приложения — включая несколько проектов, опубликованных в Microsoft Store. Я всегда ищу возможности создавать что-то значимое.',
       education: '|| Первое высшее образование - Николаевский национальный университет им. В.А. Сухомлинского (Этнология. Квалификация: Магистр. 2017) || Второе высшее образование - Национальный университет кораблестроения им. адмирала Макарова (Компьютерные науки. Квалификация: Бакалавр. 2021) ||',
       skills: '|| Языки программирования: C#, TypeScript, SQL || Фреймворки: ASP.NET Core, Entity Framework, Blazor, Angular, Avalonia UI || База данных: MSSQL ||',
+    },
+    arts: {
+      poems: 'СТИХИ',
+      music: 'МУЗЫКА',
+      musicComingSoon: 'В будущем здесь появится музыка из SoundCloud',
+      backToMain: 'Вернуться на главную',
+      readOn: 'Читать на poeziya.ru',
     },
   },
 } as const;

@@ -25,24 +25,22 @@ const ProfileSection: React.FC<ProfileSectionProps> = ({ profileSrc }) => {
           px={{ base: 2, sm: 2 }}
           py={2}
         >
-          <NextLink href="/arts" passHref>
-            <Box as="a" display="block" title="Творчество">
-              <Image
-                w="100%"
-                maxW="225px"
-                src={profileSrc}
-                borderRadius="full"
-                alt="Bohdan Harabadzhyu photo"
-                border={borderStyle}
-                boxShadow={boxShadow}
-                transition="transform 0.2s, box-shadow 0.2s"
-                cursor="pointer"
-                _hover={{
-                  transform: 'scale(1.05)',
-                  boxShadow: '0 8px 12px rgba(0, 0, 0, 0.2)',
-                }}
-              />
-            </Box>
+          <NextLink href="/arts">
+            <Image
+              w="100%"
+              maxW="225px"
+              src={profileSrc}
+              borderRadius="full"
+              alt="Bohdan Harabadzhyu photo"
+              border={borderStyle}
+              boxShadow={boxShadow}
+              transition="transform 0.2s, box-shadow 0.2s"
+              cursor="pointer"
+              _hover={{
+                transform: 'scale(1.05)',
+                boxShadow: '0 8px 12px rgba(0, 0, 0, 0.2)',
+              }}
+            />
           </NextLink>
         </Box>
       </Flex>
