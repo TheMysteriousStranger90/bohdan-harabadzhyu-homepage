@@ -20,7 +20,7 @@ const translations = {
     arts: {
       poems: 'POEMS',
       music: 'MUSIC',
-      musicComingSoon: 'Music from SoundCloud will appear here in the future',
+      musicComingSoon: 'The music section is currently under development',
       backToMain: 'Back to main page',
       readOn: 'Read on poeziya.ru',
     },
@@ -44,7 +44,7 @@ const translations = {
     arts: {
       poems: 'СТИХИ',
       music: 'МУЗЫКА',
-      musicComingSoon: 'В будущем здесь появится музыка из SoundCloud',
+      musicComingSoon: 'Раздел с музыкой находится в разработке',
       backToMain: 'Вернуться на главную',
       readOn: 'Читать на poeziya.ru',
     },

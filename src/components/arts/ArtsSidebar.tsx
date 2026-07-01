@@ -70,10 +70,10 @@ const ArtsSidebar: React.FC<ArtsSidebarProps> = ({ poems, selectedPoemId, onSele
         >
           <Image
             src="/Photo2.png"
-            alt="Bohdan Harabadzhyu"
+            alt="Bogdan Garabagiu"
             borderRadius="full"
-            w="110px"
-            h="110px"
+            w="130px"
+            h="130px"
             objectFit="cover"
             border={`2px solid ${iconBg}`}
             transition="transform 0.2s, opacity 0.2s"
@@ -90,7 +90,7 @@ const ArtsSidebar: React.FC<ArtsSidebarProps> = ({ poems, selectedPoemId, onSele
         textAlign="center"
         mb={6}
       >
-        Bohdan Harabadzhyu
+        Bogdan Garabagiu
       </Text>
 
       {/* POEMS / СТИХИ section */}
