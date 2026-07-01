@@ -66,16 +66,15 @@ const ArtsSidebar: React.FC<ArtsSidebarProps> = ({ poems, selectedPoemId, onSele
           mb={3}
           w="fit-content"
           mx="auto"
-          title={t.arts.backToMain}
         >
           <Image
             src="/Photo2.png"
             alt="Bogdan Garabagiu"
             borderRadius="full"
-            w="130px"
-            h="130px"
+            w="160px"
+            h="160px"
             objectFit="cover"
-            border={`2px solid ${iconBg}`}
+            border={`1px solid ${iconBg}`}
             transition="transform 0.2s, opacity 0.2s"
             _hover={{ transform: 'scale(1.05)', opacity: 0.85 }}
           />
