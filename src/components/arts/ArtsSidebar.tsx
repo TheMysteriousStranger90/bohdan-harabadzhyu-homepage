@@ -39,8 +39,8 @@ const ArtsSidebar: React.FC<ArtsSidebarProps> = ({ poems, selectedPoemId, onSele
   const textColor = useColorModeValue('#202023', '#f7fafc');
   const mutedText = useColorModeValue('#4b5563', '#9ca3af');
   const hoverBg = useColorModeValue('transparent', 'rgba(255,255,255,0.05)');
-  const selectedColor = useColorModeValue('#5b21b6', '#c084fc');
-  const selectedBg = useColorModeValue('rgba(91,33,182,0.08)', 'rgba(192,132,252,0.08)');
+  const selectedColor = useColorModeValue('#1363d2', '#c084fc');
+  const selectedBg = useColorModeValue('rgba(19,99,210,0.12)', 'rgba(192,132,252,0.08)');
   const chevronColor = useColorModeValue('#1363d2', '#68217a');
 
   // Icon badge — same colors as ContactIcon
@@ -210,7 +210,6 @@ const ArtsSidebar: React.FC<ArtsSidebarProps> = ({ poems, selectedPoemId, onSele
               fontFamily="var(--font-lora)"
               fontSize="xs"
               lineHeight="tall"
-              fontStyle="italic"
             >
               {t.arts.musicComingSoon}
             </Text>
