@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { Box, Flex, Stack, useColorModeValue } from '@chakra-ui/react';
+import { Flex, useColorModeValue } from '@chakra-ui/react';
 import ArtsSidebar from '@/components/arts/ArtsSidebar';
 import PoemDisplay from '@/components/arts/PoemDisplay';
 import type { Poem } from '@/components/arts/ArtsSidebar';
-import ThemeToggleButton from '@/components/ui/ThemeToggleButton';
-import LanguageToggleButton from '@/components/ui/LanguageToggleButton';
 import poemsData from '@/assets/data/poems.json';
 
 const ArtsPage: NextPage = () => {
@@ -33,16 +31,7 @@ const ArtsPage: NextPage = () => {
           selectedPoemId={selectedPoem.id}
           onSelectPoem={setSelectedPoem}
         />
-
-        <Box flex="1" position="relative">
-          <Box position="absolute" top={2} right={2} zIndex={1}>
-            <Stack direction="row" spacing={4}>
-              <ThemeToggleButton />
-              <LanguageToggleButton />
-            </Stack>
-          </Box>
-          <PoemDisplay poem={selectedPoem} />
-        </Box>
+        <PoemDisplay poem={selectedPoem} />
       </Flex>
     </>
   );

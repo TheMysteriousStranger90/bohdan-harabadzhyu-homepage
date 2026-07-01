@@ -1,6 +1,5 @@
 import React from 'react';
-import { Box, Flex, Text, Link, useColorModeValue } from '@chakra-ui/react';
-import { FiExternalLink } from 'react-icons/fi';
+import { Avatar, Box, chakra, Flex, useColorModeValue } from '@chakra-ui/react';
 import { useLanguage } from '@/context/LanguageContext';
 import translations from '@/data/translations';
 import type { Poem } from './ArtsSidebar';
@@ -15,30 +14,42 @@ const PoemDisplay: React.FC<PoemDisplayProps> = ({ poem }) => {
   const { language } = useLanguage();
   const t = translations[language];
 
-  const cardBg = useColorModeValue('#6d28d9', '#5b21b6');
-  const linkColor = '#c4b5fd';
+  // Exact same values as InfoCard
+  const backgroundColor = useColorModeValue('#1363d2', '#68217a');
+  const textColor = useColorModeValue('#202023', '#f7fafc');
+  const linkHoverColor = useColorModeValue('#f7fafc', '#202023');
 
   return (
-    <Flex flex="1" align="center" justify="center" p={{ base: 4, md: 10 }} overflowY="auto" pt={{ base: 16, md: 16 }}>
+    <Flex
+      flex="1"
+      align="flex-start"
+      justify="center"
+      p={{ base: 4, md: 10 }}
+      overflowY="auto"
+      pt={10}
+    >
       <Box
-        bg={cardBg}
-        borderRadius="xl"
-        p={{ base: 6, md: 10 }}
-        maxW="640px"
+        boxShadow="lg"
+        maxW="600px"
         w="full"
-        boxShadow="0 8px 32px rgba(124, 58, 237, 0.35)"
-        textAlign="center"
+        rounded="xs"
+        p={10}
+        bg={backgroundColor}
+        transition="transform 0.2s"
+        _hover={{ transform: 'scale(1.02)' }}
       >
-        <Text
-          color="white"
+        {/* Title — same as InfoCard title */}
+        <chakra.p
           fontFamily="var(--font-lora)"
-          fontWeight="700"
-          fontSize={{ base: 'xl', md: '2xl' }}
+          fontWeight="bold"
+          fontSize={22}
+          color={textColor}
           mb={6}
         >
           {poem.title}
-        </Text>
+        </chakra.p>
 
+        {/* Stanzas */}
         {poem.stanzas.map((stanza, idx) => {
           const lines = stanza.split('\n');
           const firstLine = lines[0].trim();
@@ -48,57 +59,53 @@ const PoemDisplay: React.FC<PoemDisplayProps> = ({ poem }) => {
             <Box key={idx} mt={idx === 0 ? 0 : 5}>
               {hasHeading ? (
                 <>
-                  <Text
-                    color="#e9d5ff"
+                  <chakra.p
                     fontFamily="var(--font-lora)"
-                    fontWeight="700"
+                    fontWeight="bold"
                     fontSize="sm"
+                    color={textColor}
                     mb={2}
                     letterSpacing="wide"
+                    opacity={0.75}
                   >
                     {firstLine}
-                  </Text>
-                  <Text
-                    color="white"
+                  </chakra.p>
+                  <chakra.p
                     fontFamily="var(--font-lora)"
-                    fontSize={{ base: 'sm', md: 'md' }}
+                    fontSize="18px"
+                    color={textColor}
                     whiteSpace="pre-line"
                     lineHeight="tall"
                   >
                     {lines.slice(1).join('\n')}
-                  </Text>
+                  </chakra.p>
                 </>
               ) : (
-                <Text
-                  color="white"
+                <chakra.p
                   fontFamily="var(--font-lora)"
-                  fontSize={{ base: 'sm', md: 'md' }}
+                  fontSize="18px"
+                  color={textColor}
                   whiteSpace="pre-line"
                   lineHeight="tall"
                 >
                   {stanza}
-                </Text>
+                </chakra.p>
               )}
             </Box>
           );
         })}
 
-        <Box display="flex" justifyContent="center" mt={8}>
-          <Link
+        {/* Link to original — same style as project links in InfoCard */}
+        <chakra.p fontFamily="var(--font-lora)" fontSize="14px" color={textColor} mt={8} opacity={0.7}>
+          <chakra.a
             href={poem.url}
-            isExternal
-            display="flex"
-            alignItems="center"
-            gap={1}
-            color={linkColor}
-            fontSize="xs"
-            fontFamily="var(--font-lora)"
-            _hover={{ color: 'white', textDecoration: 'underline' }}
+            target="_blank"
+            rel="noopener noreferrer"
+            _hover={{ color: linkHoverColor }}
           >
-            {t.arts.readOn}
-            <FiExternalLink size={12} />
-          </Link>
-        </Box>
+            {t.arts.readOn} ↗
+          </chakra.a>
+        </chakra.p>
       </Box>
     </Flex>
   );
