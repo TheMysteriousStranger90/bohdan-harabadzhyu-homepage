@@ -37,6 +37,7 @@ const PoemDisplay: React.FC<PoemDisplayProps> = ({ poem }) => {
         bg={backgroundColor}
         transition="transform 0.2s"
         _hover={{ transform: 'scale(1.02)' }}
+        textAlign="center"
       >
         {/* Title — same as InfoCard title */}
         <chakra.p
