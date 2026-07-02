@@ -25,13 +25,14 @@ import translations from '@/data/translations'
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 
+const NAMES = ['Bohdan Harabadzhyu', 'Bogdan Garabagiu'];
+
 const HeroSection: React.FC = () => {
-  const names = ['Bohdan Harabadzhyu', 'Bogdan Garabagiu'];
   const [nameIndex, setNameIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setNameIndex(prev => (prev + 1) % names.length);
+      setNameIndex(prev => (prev + 1) % NAMES.length);
     }, 10000);
     return () => clearInterval(interval);
   }, []);
@@ -92,7 +93,7 @@ const HeroSection: React.FC = () => {
               transition={{ duration: 0.5 }}
               style={{ display: 'inline-flex', alignItems: 'center' }}
             >
-              {names[nameIndex]}
+              {NAMES[nameIndex]}
             </motion.span>
           </AnimatePresence>
           {' | '}{t.heroSubtitle}
