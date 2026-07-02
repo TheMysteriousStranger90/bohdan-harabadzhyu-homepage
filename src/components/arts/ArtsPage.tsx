@@ -10,6 +10,7 @@ import poemsData from '@/assets/data/poems.json';
 import { NextPage } from 'next';
 import { useState } from 'react';
 import Head from 'next/head';
+import { lora } from '@/lib/fonts';
 
 const ArtsPage: NextPage = () => {
   const poems: Poem[] = poemsData.poems;
@@ -71,7 +72,7 @@ const ArtsPage: NextPage = () => {
 
       <Drawer isOpen={isOpen} placement="left" onClose={onClose} size="xs">
         <DrawerOverlay />
-        <DrawerContent bg={mobileBarBg}>
+        <DrawerContent bg={mobileBarBg} className={lora.variable}>
           <DrawerCloseButton zIndex={2} />
           <ArtsSidebar
             poems={poems}
