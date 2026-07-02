@@ -24,9 +24,10 @@ interface ArtsSidebarProps {
   poems: Poem[];
   selectedPoemId: number;
   onSelectPoem: (poem: Poem) => void;
+  variant?: 'static' | 'drawer';
 }
 
-const ArtsSidebar: React.FC<ArtsSidebarProps> = ({ poems, selectedPoemId, onSelectPoem }) => {
+const ArtsSidebar: React.FC<ArtsSidebarProps> = ({poems, selectedPoemId, onSelectPoem, variant = 'static',}) => {
   const [poemsOpen, setPoemsOpen] = useState(true);
   const [musicOpen, setMusicOpen] = useState(false);
 
@@ -49,16 +50,16 @@ const ArtsSidebar: React.FC<ArtsSidebarProps> = ({ poems, selectedPoemId, onSele
 
   return (
     <Box
-      w={{ base: '200px', md: '240px' }}
-      minH="100vh"
+      w={variant === 'drawer' ? 'full' : { base: '200px', md: '240px' }}
+      h={variant === 'drawer' ? 'auto' : 'full'}
       bg={sidebarBg}
-      borderRight={`1px solid ${borderColor}`}
+      borderRight={variant === 'drawer' ? 'none' : `1px solid ${borderColor}`}
       py={6}
       px={4}
       flexShrink={0}
       overflowY="auto"
     >
-      {/* Photo2 — back to homepage (NextLink is the <a>, Box is <div>) */}
+      {/* Photo2 — back to homepage */}
       <NextLink href="/">
         <Box
           display="block"

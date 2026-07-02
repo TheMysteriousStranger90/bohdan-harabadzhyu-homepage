@@ -1,8 +1,8 @@
 import React from 'react';
-import { Avatar, Box, chakra, Flex, useColorModeValue } from '@chakra-ui/react';
-import { useLanguage } from '@/context/LanguageContext';
+import {Avatar, Box, chakra, Flex, useColorModeValue} from '@chakra-ui/react';
+import {useLanguage} from '@/context/LanguageContext';
 import translations from '@/data/translations';
-import type { Poem } from './ArtsSidebar';
+import type {Poem} from './ArtsSidebar';
 
 interface PoemDisplayProps {
   poem: Poem;
@@ -10,8 +10,8 @@ interface PoemDisplayProps {
 
 const SECTION_HEADING_RE = /^(I{1,3}V?|VI{0,3}|IX|X{0,3})\./;
 
-const PoemDisplay: React.FC<PoemDisplayProps> = ({ poem }) => {
-  const { language } = useLanguage();
+const PoemDisplay: React.FC<PoemDisplayProps> = ({poem}) => {
+  const {language} = useLanguage();
   const t = translations[language];
 
   // Exact same values as InfoCard
@@ -24,29 +24,25 @@ const PoemDisplay: React.FC<PoemDisplayProps> = ({ poem }) => {
       flex="1"
       align="flex-start"
       justify="center"
-      p={{ base: 4, md: 10 }}
+      p={{base: 4, md: 10}}
       overflowY="auto"
-      pt={10}
+      pt={{base: 6, md: 10}}
     >
       <Box
         boxShadow="lg"
         maxW="600px"
         w="full"
         rounded="xs"
-        p={10}
+        p={{base: 5, md: 10}}
         bg={backgroundColor}
         transition="transform 0.2s, box-shadow 0.2s"
-        _hover={{
-          transform: 'translateY(-4px)',
-          boxShadow: '2xl',
-        }}
+        _hover={{transform: 'translateY(-4px)', boxShadow: '2xl'}}
         textAlign="center"
       >
-        {/* Title — same as InfoCard title */}
         <chakra.p
           fontFamily="var(--font-lora)"
           fontWeight="bold"
-          fontSize={22}
+          fontSize={{base: 18, md: 22}}
           color={textColor}
           mb={6}
         >
@@ -66,7 +62,7 @@ const PoemDisplay: React.FC<PoemDisplayProps> = ({ poem }) => {
                   <chakra.p
                     fontFamily="var(--font-lora)"
                     fontWeight="bold"
-                    fontSize="sm"
+                    fontSize={{ base: 'sm', md: 'md' }}
                     color={textColor}
                     mb={2}
                     letterSpacing="wide"
@@ -76,7 +72,7 @@ const PoemDisplay: React.FC<PoemDisplayProps> = ({ poem }) => {
                   </chakra.p>
                   <chakra.p
                     fontFamily="var(--font-lora)"
-                    fontSize="18px"
+                    fontSize={{ base: '15px', md: '18px' }}
                     color={textColor}
                     whiteSpace="pre-line"
                     lineHeight="tall"
@@ -87,7 +83,7 @@ const PoemDisplay: React.FC<PoemDisplayProps> = ({ poem }) => {
               ) : (
                 <chakra.p
                   fontFamily="var(--font-lora)"
-                  fontSize="18px"
+                  fontSize={{ base: '15px', md: '18px' }}
                   color={textColor}
                   whiteSpace="pre-line"
                   lineHeight="tall"
@@ -105,7 +101,7 @@ const PoemDisplay: React.FC<PoemDisplayProps> = ({ poem }) => {
             href={poem.url}
             target="_blank"
             rel="noopener noreferrer"
-            _hover={{ color: linkHoverColor }}
+            _hover={{color: linkHoverColor}}
           >
             {t.arts.readOn} ↗
           </chakra.a>
