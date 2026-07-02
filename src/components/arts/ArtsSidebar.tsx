@@ -89,7 +89,6 @@ const ArtsSidebar: React.FC<ArtsSidebarProps> = ({ poems, selectedPoemId, onSele
         textAlign="center"
         mb={6}
       >
-        Bogdan Garabagiu
       </Text>
 
       {/* POEMS / СТИХИ section */}
