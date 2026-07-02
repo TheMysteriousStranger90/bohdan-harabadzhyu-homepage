@@ -35,8 +35,11 @@ const PoemDisplay: React.FC<PoemDisplayProps> = ({ poem }) => {
         rounded="xs"
         p={10}
         bg={backgroundColor}
-        transition="transform 0.2s"
-        _hover={{ transform: 'scale(1.02)' }}
+        transition="transform 0.2s, box-shadow 0.2s"
+        _hover={{
+          transform: 'translateY(-4px)',
+          boxShadow: '2xl',
+        }}
         textAlign="center"
       >
         {/* Title — same as InfoCard title */}
