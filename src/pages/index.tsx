@@ -7,7 +7,7 @@ const Home: NextPage = () => (
   <>
     <Head>
       <title>Bohdan Harabadzhyu | C# Developer</title>
-      <meta name="description" content="Personal homepage of Bohdan Harabadzhyu, C# Developer" />
+      <meta name="description" content="Personal homepage of Bohdan Harabadzhyu (Bogdan Garabagiu), C# Developer" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <link rel="icon" href="/favicon.ico" />
     </Head>
