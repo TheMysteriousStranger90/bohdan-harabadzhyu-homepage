@@ -44,6 +44,12 @@ const ArtsSidebar: React.FC<ArtsSidebarProps> = ({poems, selectedPoemId, onSelec
   const selectedBg = useColorModeValue('rgba(19,99,210,0.12)', 'rgba(192,132,252,0.08)');
   const chevronColor = useColorModeValue('#1363d2', '#68217a');
 
+  const profileBorderColor = useColorModeValue('#0d47a1', '#222224');
+  const profileBoxShadow = useColorModeValue(
+    '0 4px 6px rgba(0, 0, 0, 0.1)',
+    '0 4px 6px rgba(0, 0, 0, 0.6)',
+  );
+
   // Icon badge — same colors as ContactIcon
   const iconBg = useColorModeValue('#1363d2', '#68217a');
   const iconColor = useColorModeValue('#202023', '#f7fafc');
@@ -75,9 +81,13 @@ const ArtsSidebar: React.FC<ArtsSidebarProps> = ({poems, selectedPoemId, onSelec
             w="160px"
             h="160px"
             objectFit="cover"
-            border={`1px solid ${iconBg}`}
-            transition="transform 0.2s, opacity 0.2s"
-            _hover={{ transform: 'scale(1.05)', opacity: 0.85 }}
+            border={`0.5px solid ${profileBorderColor}`}
+            boxShadow={profileBoxShadow}
+            transition="transform 0.2s, box-shadow 0.2s"
+            _hover={{
+              transform: 'scale(1.05)',
+              boxShadow: '0 8px 12px rgba(0, 0, 0, 0.2)',
+            }}
           />
         </Box>
       </NextLink>
