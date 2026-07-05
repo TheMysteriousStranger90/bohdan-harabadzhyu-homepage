@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Flex, Image, useColorModeValue } from '@chakra-ui/react';
+import NextLink from 'next/link';
 import SubSection from '@/components/layout/SubSection';
 
 interface ProfileSectionProps {
@@ -24,20 +25,23 @@ const ProfileSection: React.FC<ProfileSectionProps> = ({ profileSrc }) => {
           px={{ base: 2, sm: 2 }}
           py={2}
         >
-          <Image
-            w="100%"
-            maxW="225px"
-            src={profileSrc}
-            borderRadius="full"
-            alt="Bohdan Harabadzhyu photo"
-            border={borderStyle}
-            boxShadow={boxShadow}
-            transition="transform 0.2s, box-shadow 0.2s"
-            _hover={{
-              transform: 'scale(1.05)',
-              boxShadow: '0 8px 12px rgba(0, 0, 0, 0.2)',
-            }}
-          />
+          <NextLink href="/arts">
+            <Image
+              w="100%"
+              maxW="225px"
+              src={profileSrc}
+              borderRadius="full"
+              alt="Bohdan Harabadzhyu photo"
+              border={borderStyle}
+              boxShadow={boxShadow}
+              transition="transform 0.2s, box-shadow 0.2s"
+              cursor="pointer"
+              _hover={{
+                transform: 'scale(1.05)',
+                boxShadow: '0 8px 12px rgba(0, 0, 0, 0.2)',
+              }}
+            />
+          </NextLink>
         </Box>
       </Flex>
     </SubSection>
