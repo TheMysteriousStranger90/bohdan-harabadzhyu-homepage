@@ -20,14 +20,23 @@ export interface Poem {
   stanzas: string[];
 }
 
+export interface Track {
+  id: number;
+  title: string;
+  url: string;
+}
+
 interface ArtsSidebarProps {
   poems: Poem[];
-  selectedPoemId: number;
+  tracks: Track[];
+  selectedPoemId: number | null;
+  selectedTrackId: number | null;
   onSelectPoem: (poem: Poem) => void;
+  onSelectTrack: (track: Track) => void;
   variant?: 'static' | 'drawer';
 }
 
-const ArtsSidebar: React.FC<ArtsSidebarProps> = ({poems, selectedPoemId, onSelectPoem, variant = 'static',}) => {
+const ArtsSidebar: React.FC<ArtsSidebarProps> = ({poems, tracks, selectedPoemId, selectedTrackId, onSelectPoem, onSelectTrack, variant = 'static',}) => {
   const [poemsOpen, setPoemsOpen] = useState(true);
   const [musicOpen, setMusicOpen] = useState(false);
 
@@ -213,16 +222,29 @@ const ArtsSidebar: React.FC<ArtsSidebarProps> = ({poems, selectedPoemId, onSelec
         </Flex>
 
         <Collapse in={musicOpen} animateOpacity>
-          <Box pl={4} pr={2} py={3}>
-            <Text
-              color={mutedText}
-              fontFamily="var(--font-lora)"
-              fontSize="xs"
-              lineHeight="tall"
-            >
-              {t.arts.musicComingSoon}
-            </Text>
-          </Box>
+          <VStack align="stretch" spacing={0} pl={2} mt={1}>
+            {tracks.map(track => (
+              <Text
+                key={track.id}
+                py={1.5}
+                px={3}
+                fontSize="sm"
+                fontFamily="var(--font-lora)"
+                cursor="pointer"
+                borderRadius="md"
+                color={selectedTrackId === track.id ? selectedColor : mutedText}
+                fontWeight={selectedTrackId === track.id ? '600' : '400'}
+                bg={selectedTrackId === track.id ? selectedBg : 'transparent'}
+                borderLeft={`2px solid ${selectedTrackId === track.id ? selectedColor : 'transparent'}`}
+                transition="all 0.15s"
+                _hover={{ color: textColor, bg: hoverBg }}
+                onClick={() => onSelectTrack(track)}
+                noOfLines={2}
+              >
+                {track.title}
+              </Text>
+            ))}
+          </VStack>
         </Collapse>
       </Box>
     </Box>

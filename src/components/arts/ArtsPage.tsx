@@ -5,8 +5,10 @@ import {
 import { FiMenu } from 'react-icons/fi';
 import ArtsSidebar from '@/components/arts/ArtsSidebar';
 import PoemDisplay from '@/components/arts/PoemDisplay';
-import type { Poem } from '@/components/arts/ArtsSidebar';
+import TrackDisplay from '@/components/arts/TrackDisplay';
+import type { Poem, Track } from '@/components/arts/ArtsSidebar';
 import poemsData from '@/assets/data/poems.json';
+import tracksData from '@/assets/data/tracks.json';
 import { NextPage } from 'next';
 import { useState } from 'react';
 import Head from 'next/head';
@@ -14,7 +16,9 @@ import { lora } from '@/lib/fonts';
 
 const ArtsPage: NextPage = () => {
   const poems: Poem[] = poemsData.poems;
-  const [selectedPoem, setSelectedPoem] = useState<Poem>(poems[0]);
+  const tracks: Track[] = tracksData.tracks;
+  const [selectedPoem, setSelectedPoem] = useState<Poem | null>(poems[0]);
+  const [selectedTrack, setSelectedTrack] = useState<Track | null>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const gradientBackground = useColorModeValue(
@@ -24,8 +28,23 @@ const ArtsPage: NextPage = () => {
   const mobileBarBg = useColorModeValue('#d1e7f8', '#1a1a1e');
   const mobileAccent = useColorModeValue('#1363d2', '#c084fc');
 
-  const handleSelectPoem = (poem: Poem) => {
+  const selectPoem = (poem: Poem) => {
     setSelectedPoem(poem);
+    setSelectedTrack(null);
+  };
+
+  const selectTrack = (track: Track) => {
+    setSelectedTrack(track);
+    setSelectedPoem(null);
+  };
+
+  const handleSelectPoem = (poem: Poem) => {
+    selectPoem(poem);
+    onClose();
+  };
+
+  const handleSelectTrack = (track: Track) => {
+    selectTrack(track);
     onClose();
   };
 
@@ -61,12 +80,17 @@ const ArtsPage: NextPage = () => {
           <Box display={{ base: 'none', md: 'block' }}>
             <ArtsSidebar
               poems={poems}
-              selectedPoemId={selectedPoem.id}
-              onSelectPoem={setSelectedPoem}
+              tracks={tracks}
+              selectedPoemId={selectedPoem?.id ?? null}
+              selectedTrackId={selectedTrack?.id ?? null}
+              onSelectPoem={selectPoem}
+              onSelectTrack={selectTrack}
             />
           </Box>
 
-          <PoemDisplay poem={selectedPoem} />
+          {selectedTrack
+            ? <TrackDisplay track={selectedTrack} />
+            : selectedPoem && <PoemDisplay poem={selectedPoem} />}
         </Flex>
       </Flex>
 
@@ -76,8 +100,11 @@ const ArtsPage: NextPage = () => {
           <DrawerCloseButton zIndex={2} />
           <ArtsSidebar
             poems={poems}
-            selectedPoemId={selectedPoem.id}
+            tracks={tracks}
+            selectedPoemId={selectedPoem?.id ?? null}
+            selectedTrackId={selectedTrack?.id ?? null}
             onSelectPoem={handleSelectPoem}
+            onSelectTrack={handleSelectTrack}
             variant="drawer"
           />
         </DrawerContent>

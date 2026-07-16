@@ -22,6 +22,7 @@ const translations = {
       musicComingSoon: 'The music section is currently under development',
       backToMain: 'Back to main page',
       readOn: 'Read on poeziya.ru',
+      listenOn: 'Listen on SoundCloud',
     },
   },
   ru: {
@@ -45,6 +46,7 @@ const translations = {
       musicComingSoon: 'Раздел с музыкой находится в разработке',
       backToMain: 'Вернуться на главную',
       readOn: 'Читать на poeziya.ru',
+      listenOn: 'Слушать на SoundCloud',
     },
   },
 } as const;
