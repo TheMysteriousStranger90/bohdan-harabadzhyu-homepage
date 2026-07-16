@@ -102,7 +102,9 @@ const TrackDisplay: React.FC<TrackDisplayProps> = ({track, visible}) => {
   // (#202023), in dark mode a light circle with the card-colored icon
   const playBg = useColorModeValue('#202023', 'rgba(255, 255, 255, 0.92)');
   const playHoverBg = useColorModeValue('#33333a', '#ffffff');
-  const playIconColor = useColorModeValue('#f7fafc', backgroundColor);
+  // Icon takes the card color — blue on the dark button in light mode,
+  // purple on the light button in dark mode
+  const playIconColor = backgroundColor;
   const barTrackBg = useColorModeValue('rgba(32, 32, 35, 0.25)', 'rgba(0, 0, 0, 0.25)');
   const barFillBg = useColorModeValue('#202023', 'rgba(255, 255, 255, 0.95)');
 
