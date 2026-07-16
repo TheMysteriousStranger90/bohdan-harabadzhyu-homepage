@@ -98,11 +98,13 @@ const TrackDisplay: React.FC<TrackDisplayProps> = ({track, visible}) => {
   const textColor = useColorModeValue('#202023', '#f7fafc');
   const linkHoverColor = useColorModeValue('#f7fafc', '#202023');
 
-  // Custom player controls — light circle + card-colored icon, works on both card colors
-  const playBg = 'rgba(255, 255, 255, 0.92)';
-  const playHoverBg = '#ffffff';
-  const barTrackBg = 'rgba(0, 0, 0, 0.25)';
-  const barFillBg = 'rgba(255, 255, 255, 0.95)';
+  // Custom player controls — in light mode they take the poem text color
+  // (#202023), in dark mode a light circle with the card-colored icon
+  const playBg = useColorModeValue('#202023', 'rgba(255, 255, 255, 0.92)');
+  const playHoverBg = useColorModeValue('#33333a', '#ffffff');
+  const playIconColor = useColorModeValue('#f7fafc', backgroundColor);
+  const barTrackBg = useColorModeValue('rgba(32, 32, 35, 0.25)', 'rgba(0, 0, 0, 0.25)');
+  const barFillBg = useColorModeValue('#202023', 'rgba(255, 255, 255, 0.95)');
 
   const embedSrc =
     'https://w.soundcloud.com/player/?url=' +
@@ -283,14 +285,14 @@ const TrackDisplay: React.FC<TrackDisplayProps> = ({track, visible}) => {
                     ? playing
                       ? <FiPause size={20} />
                       : <FiPlay size={20} style={{marginLeft: '2px'}} />
-                    : <Spinner size="sm" color={backgroundColor} />
+                    : <Spinner size="sm" color={playIconColor} />
                 }
                 onClick={togglePlay}
                 isDisabled={!ready}
                 isRound
                 size="lg"
                 bg={playBg}
-                color={backgroundColor}
+                color={playIconColor}
                 flexShrink={0}
                 transition="transform 0.15s, background 0.15s"
                 _hover={{bg: playHoverBg, transform: 'scale(1.06)'}}
