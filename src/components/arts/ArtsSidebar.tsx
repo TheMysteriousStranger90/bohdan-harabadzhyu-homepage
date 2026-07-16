@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Box,
   Flex,
@@ -37,8 +37,19 @@ interface ArtsSidebarProps {
 }
 
 const ArtsSidebar: React.FC<ArtsSidebarProps> = ({poems, tracks, selectedPoemId, selectedTrackId, onSelectPoem, onSelectTrack, variant = 'static',}) => {
-  const [poemsOpen, setPoemsOpen] = useState(true);
-  const [musicOpen, setMusicOpen] = useState(false);
+  // The section holding the current selection starts expanded
+  // (the drawer remounts on every open, so initial state matters)
+  const [poemsOpen, setPoemsOpen] = useState(selectedTrackId === null);
+  const [musicOpen, setMusicOpen] = useState(selectedTrackId !== null);
+
+  // Keep the active section expanded when the selection changes
+  useEffect(() => {
+    if (selectedTrackId !== null) setMusicOpen(true);
+  }, [selectedTrackId]);
+
+  useEffect(() => {
+    if (selectedPoemId !== null) setPoemsOpen(true);
+  }, [selectedPoemId]);
 
   const { language } = useLanguage();
   const t = translations[language];
@@ -168,10 +179,9 @@ const ArtsSidebar: React.FC<ArtsSidebarProps> = ({poems, tracks, selectedPoemId,
                 fontWeight={selectedPoemId === poem.id ? '600' : '400'}
                 bg={selectedPoemId === poem.id ? selectedBg : 'transparent'}
                 borderLeft={`2px solid ${selectedPoemId === poem.id ? selectedColor : 'transparent'}`}
-                transition="all 0.15s"
+                transition="color 0.15s, background-color 0.15s"
                 _hover={{ color: textColor, bg: hoverBg }}
                 onClick={() => onSelectPoem(poem)}
-                noOfLines={2}
               >
                 {poem.title}
               </Text>
@@ -236,10 +246,9 @@ const ArtsSidebar: React.FC<ArtsSidebarProps> = ({poems, tracks, selectedPoemId,
                 fontWeight={selectedTrackId === track.id ? '600' : '400'}
                 bg={selectedTrackId === track.id ? selectedBg : 'transparent'}
                 borderLeft={`2px solid ${selectedTrackId === track.id ? selectedColor : 'transparent'}`}
-                transition="all 0.15s"
+                transition="color 0.15s, background-color 0.15s"
                 _hover={{ color: textColor, bg: hoverBg }}
                 onClick={() => onSelectTrack(track)}
-                noOfLines={2}
               >
                 {track.title}
               </Text>
