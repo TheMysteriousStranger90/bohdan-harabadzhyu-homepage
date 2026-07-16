@@ -88,9 +88,13 @@ const ArtsPage: NextPage = () => {
             />
           </Box>
 
-          {selectedTrack
-            ? <TrackDisplay track={selectedTrack} />
-            : selectedPoem && <PoemDisplay poem={selectedPoem} />}
+          {/* TrackDisplay stays mounted even when a poem is shown — it owns the
+              hidden SoundCloud iframe, and unmounting that crashes the widget script */}
+          {selectedTrack === null && selectedPoem && <PoemDisplay poem={selectedPoem} />}
+          <TrackDisplay
+            track={selectedTrack ?? tracks[0]}
+            visible={selectedTrack !== null}
+          />
         </Flex>
       </Flex>
 
