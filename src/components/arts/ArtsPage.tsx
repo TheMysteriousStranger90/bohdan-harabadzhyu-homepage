@@ -19,6 +19,7 @@ const ArtsPage: NextPage = () => {
   const tracks: Track[] = tracksData.tracks;
   const [selectedPoem, setSelectedPoem] = useState<Poem | null>(poems[0]);
   const [selectedTrack, setSelectedTrack] = useState<Track | null>(null);
+  const [activeTrack, setActiveTrack] = useState<Track>(tracks[0]);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const gradientBackground = useColorModeValue(
@@ -35,6 +36,7 @@ const ArtsPage: NextPage = () => {
 
   const selectTrack = (track: Track) => {
     setSelectedTrack(track);
+    setActiveTrack(track);
     setSelectedPoem(null);
   };
 
@@ -92,7 +94,7 @@ const ArtsPage: NextPage = () => {
               hidden SoundCloud iframe, and unmounting that crashes the widget script */}
           {selectedTrack === null && selectedPoem && <PoemDisplay poem={selectedPoem} />}
           <TrackDisplay
-            track={selectedTrack ?? tracks[0]}
+            track={activeTrack}
             visible={selectedTrack !== null}
           />
         </Flex>
