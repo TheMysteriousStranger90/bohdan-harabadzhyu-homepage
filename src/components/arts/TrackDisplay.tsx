@@ -92,6 +92,11 @@ const TrackDisplay: React.FC<TrackDisplayProps> = ({track, visible}) => {
   const [playing, setPlaying] = useState(false);
   const [position, setPosition] = useState(0); // ms
   const [duration, setDuration] = useState(0); // ms
+  // true while widget.load() for a newly selected track is in flight —
+  // blocks the Play button so a click can't race the SoundCloud widget
+  // (otherwise the click can land before the new track is actually loaded,
+  // silently getting dropped and requiring a second click to work)
+  const [switchingTrack, setSwitchingTrack] = useState(false);
 
   // Exact same values as PoemDisplay / InfoCard
   const backgroundColor = useColorModeValue('#1363d2', '#68217a');
@@ -175,11 +180,13 @@ const TrackDisplay: React.FC<TrackDisplayProps> = ({track, visible}) => {
     setPlaying(false);
     setPosition(0);
     setDuration(0);
+    setSwitchingTrack(true);
     widgetRef.current?.load(track.url, {
       auto_play: false,
       show_teaser: false,
       callback: () => {
         widgetRef.current?.getDuration(ms => setDuration(ms));
+        setSwitchingTrack(false);
       },
     });
   }, [ready, track.url]);
@@ -191,7 +198,7 @@ const TrackDisplay: React.FC<TrackDisplayProps> = ({track, visible}) => {
 
   const togglePlay = () => {
     const widget = widgetRef.current;
-    if (!widget || !ready) return;
+    if (!widget || !ready || switchingTrack) return;
     if (playing) widget.pause();
     else widget.play();
   };
@@ -283,14 +290,14 @@ const TrackDisplay: React.FC<TrackDisplayProps> = ({track, visible}) => {
               <IconButton
                 aria-label={playing ? 'Pause' : 'Play'}
                 icon={
-                  ready
+                  ready && !switchingTrack
                     ? playing
                       ? <FiPause size={20} />
                       : <FiPlay size={20} style={{marginLeft: '2px'}} />
                     : <Spinner size="sm" color={playIconColor} />
                 }
                 onClick={togglePlay}
-                isDisabled={!ready}
+                isDisabled={!ready || switchingTrack}
                 isRound
                 size="lg"
                 bg={playBg}
