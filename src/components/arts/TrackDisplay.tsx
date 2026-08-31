@@ -84,6 +84,7 @@ const TrackDisplay: React.FC<TrackDisplayProps> = ({track, visible}) => {
   const widgetRef = useRef<SCWidget | null>(null);
   const barRef = useRef<HTMLDivElement>(null);
   const seekingRef = useRef(false);
+  const switchingRef = useRef(false);
   // The iframe is created once and reused; track changes go through widget.load()
   const initialUrlRef = useRef(track.url);
   const loadedUrlRef = useRef(track.url);
@@ -143,7 +144,9 @@ const TrackDisplay: React.FC<TrackDisplayProps> = ({track, visible}) => {
           if (!cancelled) setPlaying(false);
         });
         widget.bind(Events.PLAY_PROGRESS, e => {
-          if (!cancelled && !seekingRef.current && e) setPosition(e.currentPosition);
+          if (!cancelled && !seekingRef.current && !switchingRef.current && e) {
+            setPosition(e.currentPosition);
+          }
         });
         widget.bind(Events.FINISH, () => {
           if (cancelled) return;
@@ -177,6 +180,9 @@ const TrackDisplay: React.FC<TrackDisplayProps> = ({track, visible}) => {
     if (!ready || loadedUrlRef.current === track.url) return;
     loadedUrlRef.current = track.url;
     seekingRef.current = false;
+    switchingRef.current = true;
+    widgetRef.current?.pause();
+
     setPlaying(false);
     setPosition(0);
     setDuration(0);
@@ -186,6 +192,7 @@ const TrackDisplay: React.FC<TrackDisplayProps> = ({track, visible}) => {
       show_teaser: false,
       callback: () => {
         widgetRef.current?.getDuration(ms => setDuration(ms));
+        switchingRef.current = false;
         setSwitchingTrack(false);
       },
     });
