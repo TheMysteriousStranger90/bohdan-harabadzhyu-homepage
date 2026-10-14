@@ -1,6 +1,7 @@
 import React from 'react';
 import { type AppProps } from 'next/app';
 import { ChakraProvider } from '@chakra-ui/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import theme from '@/theme';
 import '@/styles/globals.css';
 import { LanguageProvider } from '@/context/LanguageContext';
@@ -12,6 +13,7 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => (
       <main className={lora.variable}>
         <Component {...pageProps} />
       </main>
+      <SpeedInsights />
     </LanguageProvider>
   </ChakraProvider>
 );
