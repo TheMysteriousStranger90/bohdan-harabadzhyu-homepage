@@ -59,7 +59,13 @@ const ArtsPage: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Flex direction="column" h="100vh" overflow="hidden" bgGradient={gradientBackground}>
+      <Flex
+        direction="column"
+        h="100vh"
+        sx={{ '@supports (height: 100dvh)': { height: '100dvh' } }}
+        overflow="hidden"
+        bgGradient={gradientBackground}
+      >
         {/* Mobile top bar */}
         <Flex
           display={{ base: 'flex', md: 'none' }}
@@ -102,7 +108,11 @@ const ArtsPage: NextPage = () => {
 
       <Drawer isOpen={isOpen} placement="left" onClose={onClose} size="xs">
         <DrawerOverlay />
-        <DrawerContent bg={mobileBarBg} className={lora.variable}>
+        <DrawerContent
+          bg={mobileBarBg}
+          className={lora.variable}
+          sx={{ '@supports (height: 100dvh)': { height: '100dvh', maxHeight: '100dvh' } }}
+        >
           <DrawerCloseButton zIndex={2} />
           <ArtsSidebar
             poems={poems}

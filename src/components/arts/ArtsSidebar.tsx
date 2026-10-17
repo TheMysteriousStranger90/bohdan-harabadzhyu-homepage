@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Box,
   Flex,
@@ -51,6 +51,15 @@ const ArtsSidebar: React.FC<ArtsSidebarProps> = ({poems, tracks, selectedPoemId,
     if (selectedPoemId !== null) setPoemsOpen(true);
   }, [selectedPoemId]);
 
+  const musicSectionRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (variant !== 'drawer' || !musicOpen) return;
+    const id = window.setTimeout(() => {
+      musicSectionRef.current?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }, 350);
+    return () => window.clearTimeout(id);
+  }, [musicOpen, variant]);
+
   const { language } = useLanguage();
   const t = translations[language];
 
@@ -77,13 +86,17 @@ const ArtsSidebar: React.FC<ArtsSidebarProps> = ({poems, tracks, selectedPoemId,
   return (
     <Box
       w={variant === 'drawer' ? 'full' : { base: '200px', md: '240px' }}
-      h={variant === 'drawer' ? 'auto' : 'full'}
+      h="full"
+      flex={variant === 'drawer' ? '1 1 auto' : undefined}
+      minH={0}
       bg={sidebarBg}
       borderRight={variant === 'drawer' ? 'none' : `1px solid ${borderColor}`}
-      py={6}
+      pt={6}
+      pb={variant === 'drawer' ? 'calc(1.5rem + env(safe-area-inset-bottom))' : 6}
       px={4}
-      flexShrink={0}
+      flexShrink={variant === 'drawer' ? 1 : 0}
       overflowY="auto"
+      overscrollBehavior="contain"
     >
       {/* Photo2 — back to homepage */}
       <NextLink href="/">
@@ -191,7 +204,7 @@ const ArtsSidebar: React.FC<ArtsSidebarProps> = ({poems, tracks, selectedPoemId,
       </Box>
 
       {/* MUSIC / МУЗЫКА section */}
-      <Box>
+      <Box ref={musicSectionRef}>
         <Flex
           align="center"
           gap={2}
