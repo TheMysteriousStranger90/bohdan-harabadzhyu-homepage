@@ -11,7 +11,6 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
-import { useRouter } from 'next/router';
 import { FiChevronUp, FiChevronDown, FiPenTool, FiMusic } from 'react-icons/fi';
 import type { IconType } from 'react-icons';
 import { useLanguage } from '@/context/LanguageContext';
@@ -35,8 +34,8 @@ interface ArtsSidebarProps {
   tracks: Track[];
   selectedPoemId: number | null;
   selectedTrackId: number | null;
-  /** Called after an item link is activated (the mobile drawer uses it to close itself). */
-  onNavigate?: () => void;
+  /** Called after an item link is activated (drawer variant closes first, then parent navigates). */
+  onNavigate?: (href: string) => void;
   variant?: 'static' | 'drawer';
 }
 
@@ -126,7 +125,7 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
 interface SidebarLinkProps {
   href: string;
   selected: boolean;
-  onNavigate?: () => void;
+  onNavigate?: (href: string) => void;
   children: React.ReactNode;
   colors: {
     text: string;
@@ -139,19 +138,14 @@ interface SidebarLinkProps {
 
 /** One poem/track. A real link, so it is focusable, middle-clickable and copyable (/arts?poem=3). */
 const SidebarLink: React.FC<SidebarLinkProps> = ({ href, selected, onNavigate, children, colors }) => {
-  const router = useRouter();
-
-  // Inside the mobile drawer behave like the old version: close the drawer synchronously and
-  // select the item in the same tick, instead of letting <a>/NextLink navigate while the drawer
-  // is still animating out (the focused link would be unmounted mid-navigation).
+  // In the drawer: close first, then let the parent navigate on Drawer onCloseComplete.
   // Ctrl/Cmd/middle-click still open the link normally.
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (!onNavigate) return; // desktop sidebar: plain NextLink navigation
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
     e.preventDefault();
     e.currentTarget.blur(); // don't leave focus on an element that is about to disappear
-    onNavigate();
-    void router.replace(href, undefined, { shallow: true, scroll: false });
+    onNavigate(href);
   };
 
   return (

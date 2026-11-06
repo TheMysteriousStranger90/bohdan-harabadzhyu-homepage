@@ -113,6 +113,53 @@ test.describe('/arts navigation', () => {
     await expect(drawer).toBeHidden();
     await expect(page.getByRole('slider', { name: 'Seek' })).toBeVisible();
   });
+
+  test('mobile: drawer keeps opening after repeated track/poem selections', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto('/arts');
+
+    const toggle = page.getByRole('button', { name: 'Open poems list' });
+    const drawer = page.getByRole('dialog');
+
+    const ensureSectionExpanded = async (name: 'POEMS' | 'MUSIC') => {
+      const section = drawer.getByRole('button', { name });
+      if ((await section.getAttribute('aria-expanded')) !== 'true') {
+        await section.click();
+      }
+    };
+
+    const sequence = [
+      { type: 'track' as const, id: tracks[1].id, title: tracks[1].title },
+      { type: 'track' as const, id: tracks[2].id, title: tracks[2].title },
+      { type: 'poem' as const, id: poems[2].id, title: poems[2].title },
+      { type: 'track' as const, id: tracks[0].id, title: tracks[0].title },
+      { type: 'poem' as const, id: poems[1].id, title: poems[1].title },
+    ];
+
+    for (const step of sequence) {
+      await toggle.click();
+      await expect(drawer).toBeVisible();
+
+      if (step.type === 'track') {
+        await ensureSectionExpanded('MUSIC');
+        await drawer.getByRole('link', { name: step.title, exact: true }).click();
+        await expect(page).toHaveURL(new RegExp(`/arts\\?track=${step.id}$`));
+        const playButton = page.getByRole('button', { name: 'Play' });
+        await expect(playButton).toBeEnabled();
+        await playButton.click();
+        await expect(page.getByRole('button', { name: 'Pause' })).toBeVisible();
+      } else {
+        await ensureSectionExpanded('POEMS');
+        await drawer.getByRole('link', { name: step.title, exact: true }).click();
+        await expect(page).toHaveURL(new RegExp(`/arts\\?poem=${step.id}$`));
+      }
+
+      await expect(drawer).toBeHidden();
+    }
+
+    await toggle.click();
+    await expect(drawer).toBeVisible();
+  });
 });
 
 test.describe('seek slider keyboard support', () => {
