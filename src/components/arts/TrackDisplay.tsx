@@ -52,6 +52,10 @@ const loadWidgetApi = (): Promise<void> => {
   return widgetApiPromise;
 };
 
+// Keyboard seeking: arrows move by SEEK_STEP_MS, PageUp/PageDown by SEEK_PAGE_MS
+const SEEK_STEP_MS = 5_000;
+const SEEK_PAGE_MS = 15_000;
+
 const formatTime = (ms: number) => {
   const totalSec = Math.floor(ms / 1000);
   const m = Math.floor(totalSec / 60);
@@ -238,6 +242,43 @@ const TrackDisplay: React.FC<TrackDisplayProps> = ({track, visible}) => {
     widgetRef.current?.seekTo(newPosition);
   };
 
+  // Keyboard support for the seek slider (WAI-ARIA slider pattern)
+  const seekBy = (deltaMs: number) => {
+    const next = Math.min(Math.max(position + deltaMs, 0), duration);
+    setPosition(next);
+    widgetRef.current?.seekTo(next);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (!ready || !duration || switchingTrack) return;
+    switch (e.key) {
+      case 'ArrowRight':
+      case 'ArrowUp':
+        seekBy(SEEK_STEP_MS);
+        break;
+      case 'ArrowLeft':
+      case 'ArrowDown':
+        seekBy(-SEEK_STEP_MS);
+        break;
+      case 'PageUp':
+        seekBy(SEEK_PAGE_MS);
+        break;
+      case 'PageDown':
+        seekBy(-SEEK_PAGE_MS);
+        break;
+      case 'Home':
+        seekBy(-duration);
+        break;
+      case 'End':
+        seekBy(duration);
+        break;
+      default:
+        return;
+    }
+    e.preventDefault();
+  };
+
+  const seekable = ready && duration > 0 && !switchingTrack;
   const progressPercent = duration ? (position / duration) * 100 : 0;
 
   return (
@@ -329,11 +370,17 @@ const TrackDisplay: React.FC<TrackDisplayProps> = ({track, visible}) => {
                   onPointerDown={handlePointerDown}
                   onPointerMove={handlePointerMove}
                   onPointerUp={handlePointerUp}
+                  onKeyDown={handleKeyDown}
                   role="slider"
+                  tabIndex={seekable ? 0 : -1}
                   aria-label="Seek"
+                  aria-disabled={!seekable}
+                  aria-orientation="horizontal"
                   aria-valuemin={0}
-                  aria-valuemax={duration}
-                  aria-valuenow={position}
+                  aria-valuemax={Math.round(duration / 1000)}
+                  aria-valuenow={Math.round(position / 1000)}
+                  aria-valuetext={`${formatTime(position)} of ${duration ? formatTime(duration) : '–:––'}`}
+                  _focusVisible={{outline: '2px solid', outlineColor: barFillBg, outlineOffset: '4px'}}
                 >
                   <Box
                     position="absolute"

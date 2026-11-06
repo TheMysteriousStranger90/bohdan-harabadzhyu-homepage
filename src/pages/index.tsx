@@ -1,16 +1,10 @@
-import React from 'react';
 import type { NextPage } from 'next';
-import Head from 'next/head';
 import HeroSection from '@/components/sections/HeroSection';
+import HomeSeo from '@/components/seo/HomeSeo';
 
 const Home: NextPage = () => (
   <>
-    <Head>
-      <title>Bohdan Harabadzhyu | Full-Stack .NET Developer</title>
-      <meta name="description" content="Personal homepage of Bohdan Harabadzhyu (Bogdan Garabagiu), Full-Stack .NET Developer" />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <link rel="icon" href="/favicon.ico" />
-    </Head>
+    <HomeSeo />
     <HeroSection />
   </>
 );
