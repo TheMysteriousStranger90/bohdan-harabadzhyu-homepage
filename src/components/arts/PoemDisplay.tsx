@@ -1,5 +1,5 @@
 import React from 'react';
-import {Avatar, Box, chakra, Flex, useColorModeValue} from '@chakra-ui/react';
+import {Box, chakra, Flex, useColorModeValue} from '@chakra-ui/react';
 import {useLanguage} from '@/context/LanguageContext';
 import translations from '@/data/translations';
 import type {Poem} from './ArtsSidebar';

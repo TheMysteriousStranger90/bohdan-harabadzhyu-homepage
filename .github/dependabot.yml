@@ -1,0 +1,27 @@
+version: 2
+
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    groups:
+      # One PR per week for all minor/patch bumps; majors arrive as separate PRs.
+      minor-and-patch:
+        update-types: [minor, patch]
+    ignore:
+      # The Next.js 15 lint stack (eslint-plugin-react, jsx-a11y) does not support ESLint 10 yet.
+      # Remove this once eslint-config-next / the plugins declare support.
+      - dependency-name: eslint
+        update-types: [version-update:semver-major]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    groups:
+      actions:
+        patterns: ['*']

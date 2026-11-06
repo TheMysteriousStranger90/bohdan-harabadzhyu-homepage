@@ -1,15 +1,18 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useId, useRef, useState } from 'react';
 import {
   Box,
-  Flex,
-  Image,
-  Text,
+  chakra,
   Collapse,
-  VStack,
+  Image,
+  Link,
+  List,
+  ListItem,
+  Text,
   useColorModeValue,
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { FiChevronUp, FiChevronDown, FiPenTool, FiMusic } from 'react-icons/fi';
+import type { IconType } from 'react-icons';
 import { useLanguage } from '@/context/LanguageContext';
 import translations from '@/data/translations';
 
@@ -31,12 +34,141 @@ interface ArtsSidebarProps {
   tracks: Track[];
   selectedPoemId: number | null;
   selectedTrackId: number | null;
-  onSelectPoem: (poem: Poem) => void;
-  onSelectTrack: (track: Track) => void;
+  /** Called after an item link is activated (the mobile drawer uses it to close itself). */
+  onNavigate?: () => void;
   variant?: 'static' | 'drawer';
 }
 
-const ArtsSidebar: React.FC<ArtsSidebarProps> = ({poems, tracks, selectedPoemId, selectedTrackId, onSelectPoem, onSelectTrack, variant = 'static',}) => {
+interface SidebarSectionProps {
+  label: string;
+  icon: IconType;
+  open: boolean;
+  onToggle: () => void;
+  sectionRef?: React.Ref<HTMLDivElement>;
+  children: React.ReactNode;
+  colors: {
+    text: string;
+    hoverBg: string;
+    chevron: string;
+    iconBg: string;
+    iconColor: string;
+    focus: string;
+  };
+}
+
+/** Collapsible section: a real <button> header (keyboard + screen reader friendly) and a list. */
+const SidebarSection: React.FC<SidebarSectionProps> = ({
+                                                         label, icon: SectionIcon, open, onToggle, sectionRef, children, colors,
+                                                       }) => {
+  const panelId = useId();
+
+  return (
+    <Box ref={sectionRef}>
+      <chakra.button
+        type="button"
+        onClick={onToggle}
+        aria-expanded={open}
+        aria-controls={panelId}
+        display="flex"
+        alignItems="center"
+        gap={2}
+        w="full"
+        textAlign="left"
+        cursor="pointer"
+        py={2}
+        px={2}
+        borderRadius="md"
+        userSelect="none"
+        _hover={{ bg: colors.hoverBg }}
+        _focusVisible={{ outline: '2px solid', outlineColor: colors.focus, outlineOffset: '2px' }}
+      >
+        {/* Round icon badge — matches ContactIcon style */}
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          w="34px"
+          h="34px"
+          borderRadius="full"
+          bg={colors.iconBg}
+          color={colors.iconColor}
+          flexShrink={0}
+          aria-hidden="true"
+        >
+          <SectionIcon size={15} />
+        </Box>
+        <Text
+          as="span"
+          color={colors.text}
+          fontFamily="var(--font-lora)"
+          fontWeight="700"
+          fontSize="sm"
+          letterSpacing="wider"
+          flex="1"
+        >
+          {label}
+        </Text>
+        {open
+          ? <FiChevronUp color={colors.chevron} size={16} aria-hidden="true" />
+          : <FiChevronDown color={colors.chevron} size={16} aria-hidden="true" />}
+      </chakra.button>
+
+      <Collapse in={open} animateOpacity>
+        <List id={panelId} spacing={0} pl={2} mt={1}>
+          {children}
+        </List>
+      </Collapse>
+    </Box>
+  );
+};
+
+interface SidebarLinkProps {
+  href: string;
+  selected: boolean;
+  onNavigate?: () => void;
+  children: React.ReactNode;
+  colors: {
+    text: string;
+    muted: string;
+    hoverBg: string;
+    selected: string;
+    selectedBg: string;
+  };
+}
+
+/** One poem/track. A real link, so it is focusable, middle-clickable and copyable (/arts?poem=3). */
+const SidebarLink: React.FC<SidebarLinkProps> = ({ href, selected, onNavigate, children, colors }) => (
+  <ListItem>
+    <Link
+      as={NextLink}
+      href={href}
+      shallow
+      replace
+      scroll={false}
+      onClick={onNavigate}
+      aria-current={selected ? 'page' : undefined}
+      display="block"
+      py={1.5}
+      px={3}
+      fontSize="sm"
+      fontFamily="var(--font-lora)"
+      borderRadius="md"
+      color={selected ? colors.selected : colors.muted}
+      fontWeight={selected ? '600' : '400'}
+      bg={selected ? colors.selectedBg : 'transparent'}
+      borderLeft={`2px solid ${selected ? colors.selected : 'transparent'}`}
+      transition="color 0.15s, background-color 0.15s"
+      _hover={{ color: colors.text, bg: colors.hoverBg, textDecoration: 'none' }}
+      _focusVisible={{ outline: '2px solid', outlineColor: colors.selected, outlineOffset: '2px' }}
+    >
+      {children}
+    </Link>
+  </ListItem>
+);
+
+const ArtsSidebar: React.FC<ArtsSidebarProps> = ({
+                                                   poems, tracks, selectedPoemId, selectedTrackId, onNavigate, variant = 'static',
+                                                 }) => {
   // The section holding the current selection starts expanded
   // (the drawer remounts on every open, so initial state matters)
   const [poemsOpen, setPoemsOpen] = useState(selectedTrackId === null);
@@ -83,8 +215,26 @@ const ArtsSidebar: React.FC<ArtsSidebarProps> = ({poems, tracks, selectedPoemId,
   const iconBg = useColorModeValue('#1363d2', '#68217a');
   const iconColor = useColorModeValue('#202023', '#f7fafc');
 
+  const sectionColors = {
+    text: textColor,
+    hoverBg,
+    chevron: chevronColor,
+    iconBg,
+    iconColor,
+    focus: selectedColor,
+  };
+  const linkColors = {
+    text: textColor,
+    muted: mutedText,
+    hoverBg,
+    selected: selectedColor,
+    selectedBg,
+  };
+
   return (
     <Box
+      as="nav"
+      aria-label="Arts"
       w={variant === 'drawer' ? 'full' : { base: '200px', md: '240px' }}
       h="full"
       flex={variant === 'drawer' ? '1 1 auto' : undefined}
@@ -125,150 +275,52 @@ const ArtsSidebar: React.FC<ArtsSidebarProps> = ({poems, tracks, selectedPoemId,
         </Box>
       </NextLink>
 
-      <Text
-        color={textColor}
-        fontFamily="var(--font-lora)"
-        fontSize="sm"
-        fontWeight="600"
-        textAlign="center"
-        mb={6}
-      >
-      </Text>
+      <Box h={6} />
 
       {/* POEMS / СТИХИ section */}
       <Box mb={4}>
-        <Flex
-          align="center"
-          gap={2}
-          cursor="pointer"
-          onClick={() => setPoemsOpen(v => !v)}
-          py={2}
-          px={2}
-          borderRadius="md"
-          _hover={{ bg: hoverBg }}
-          userSelect="none"
+        <SidebarSection
+          label={t.arts.poems}
+          icon={FiPenTool}
+          open={poemsOpen}
+          onToggle={() => setPoemsOpen(v => !v)}
+          colors={sectionColors}
         >
-          {/* Round icon badge — matches ContactIcon style */}
-          <Box
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            w="34px"
-            h="34px"
-            borderRadius="full"
-            bg={iconBg}
-            color={iconColor}
-            flexShrink={0}
-          >
-            <FiPenTool size={15} />
-          </Box>
-          <Text
-            color={textColor}
-            fontFamily="var(--font-lora)"
-            fontWeight="700"
-            fontSize="sm"
-            letterSpacing="wider"
-            flex="1"
-          >
-            {t.arts.poems}
-          </Text>
-          {poemsOpen
-            ? <FiChevronUp color={chevronColor} size={16} />
-            : <FiChevronDown color={chevronColor} size={16} />}
-        </Flex>
-
-        <Collapse in={poemsOpen} animateOpacity>
-          <VStack align="stretch" spacing={0} pl={2} mt={1}>
-            {poems.map(poem => (
-              <Text
-                key={poem.id}
-                py={1.5}
-                px={3}
-                fontSize="sm"
-                fontFamily="var(--font-lora)"
-                cursor="pointer"
-                borderRadius="md"
-                color={selectedPoemId === poem.id ? selectedColor : mutedText}
-                fontWeight={selectedPoemId === poem.id ? '600' : '400'}
-                bg={selectedPoemId === poem.id ? selectedBg : 'transparent'}
-                borderLeft={`2px solid ${selectedPoemId === poem.id ? selectedColor : 'transparent'}`}
-                transition="color 0.15s, background-color 0.15s"
-                _hover={{ color: textColor, bg: hoverBg }}
-                onClick={() => onSelectPoem(poem)}
-              >
-                {poem.title}
-              </Text>
-            ))}
-          </VStack>
-        </Collapse>
+          {poems.map(poem => (
+            <SidebarLink
+              key={poem.id}
+              href={`/arts?poem=${poem.id}`}
+              selected={selectedPoemId === poem.id}
+              onNavigate={onNavigate}
+              colors={linkColors}
+            >
+              {poem.title}
+            </SidebarLink>
+          ))}
+        </SidebarSection>
       </Box>
 
       {/* MUSIC / МУЗЫКА section */}
-      <Box ref={musicSectionRef}>
-        <Flex
-          align="center"
-          gap={2}
-          cursor="pointer"
-          onClick={() => setMusicOpen(v => !v)}
-          py={2}
-          px={2}
-          borderRadius="md"
-          _hover={{ bg: hoverBg }}
-          userSelect="none"
-        >
-          <Box
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            w="34px"
-            h="34px"
-            borderRadius="full"
-            bg={iconBg}
-            color={iconColor}
-            flexShrink={0}
+      <SidebarSection
+        label={t.arts.music}
+        icon={FiMusic}
+        open={musicOpen}
+        onToggle={() => setMusicOpen(v => !v)}
+        sectionRef={musicSectionRef}
+        colors={sectionColors}
+      >
+        {tracks.map(track => (
+          <SidebarLink
+            key={track.id}
+            href={`/arts?track=${track.id}`}
+            selected={selectedTrackId === track.id}
+            onNavigate={onNavigate}
+            colors={linkColors}
           >
-            <FiMusic size={15} />
-          </Box>
-          <Text
-            color={textColor}
-            fontFamily="var(--font-lora)"
-            fontWeight="700"
-            fontSize="sm"
-            letterSpacing="wider"
-            flex="1"
-          >
-            {t.arts.music}
-          </Text>
-          {musicOpen
-            ? <FiChevronUp color={chevronColor} size={16} />
-            : <FiChevronDown color={chevronColor} size={16} />}
-        </Flex>
-
-        <Collapse in={musicOpen} animateOpacity>
-          <VStack align="stretch" spacing={0} pl={2} mt={1}>
-            {tracks.map(track => (
-              <Text
-                key={track.id}
-                py={1.5}
-                px={3}
-                fontSize="sm"
-                fontFamily="var(--font-lora)"
-                cursor="pointer"
-                borderRadius="md"
-                color={selectedTrackId === track.id ? selectedColor : mutedText}
-                fontWeight={selectedTrackId === track.id ? '600' : '400'}
-                bg={selectedTrackId === track.id ? selectedBg : 'transparent'}
-                borderLeft={`2px solid ${selectedTrackId === track.id ? selectedColor : 'transparent'}`}
-                transition="color 0.15s, background-color 0.15s"
-                _hover={{ color: textColor, bg: hoverBg }}
-                onClick={() => onSelectTrack(track)}
-              >
-                {track.title}
-              </Text>
-            ))}
-          </VStack>
-        </Collapse>
-      </Box>
+            {track.title}
+          </SidebarLink>
+        ))}
+      </SidebarSection>
     </Box>
   );
 };

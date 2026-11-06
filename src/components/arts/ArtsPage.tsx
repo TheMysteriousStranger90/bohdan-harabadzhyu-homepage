@@ -12,14 +12,39 @@ import tracksData from '@/assets/data/tracks.json';
 import { NextPage } from 'next';
 import { useState } from 'react';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { lora } from '@/lib/fonts';
+
+/** `?poem=3` / `?track=2` → 3 / 2. Anything that is not a positive integer → null. */
+const parseId = (value: string | string[] | undefined): number | null => {
+  const raw = Array.isArray(value) ? value[0] : value;
+  if (!raw || !/^\d+$/.test(raw)) return null;
+  const id = Number(raw);
+  return id > 0 ? id : null;
+};
 
 const ArtsPage: NextPage = () => {
   const poems: Poem[] = poemsData.poems;
   const tracks: Track[] = tracksData.tracks;
-  const [selectedPoem, setSelectedPoem] = useState<Poem | null>(poems[0]);
-  const [selectedTrack, setSelectedTrack] = useState<Track | null>(null);
+  const router = useRouter();
+
+  // The URL is the single source of truth for the selection, so every poem/track has a
+  // shareable link: /arts?poem=3 or /arts?track=2. (On the statically prerendered page
+  // router.query is empty until hydration, which falls back to the first poem — same as the HTML.)
+  // A valid ?track wins over ?poem; unknown ids fall back to the first poem.
+  const selectedTrack = tracks.find(t => t.id === parseId(router.query.track)) ?? null;
+  const selectedPoem: Poem | null = selectedTrack
+    ? null
+    : (poems.find(p => p.id === parseId(router.query.poem)) ?? poems[0] ?? null);
+
+  // TrackDisplay stays mounted even when a poem is shown — it owns the hidden SoundCloud
+  // iframe — so it always needs a track. Adjust state during render (not in an effect) so it
+  // never shows the previous track's title for a frame.
   const [activeTrack, setActiveTrack] = useState<Track>(tracks[0]);
+  if (selectedTrack && selectedTrack.id !== activeTrack.id) {
+    setActiveTrack(selectedTrack);
+  }
+
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const gradientBackground = useColorModeValue(
@@ -29,31 +54,16 @@ const ArtsPage: NextPage = () => {
   const mobileBarBg = useColorModeValue('#d1e7f8', '#1a1a1e');
   const mobileAccent = useColorModeValue('#1363d2', '#c084fc');
 
-  const selectPoem = (poem: Poem) => {
-    setSelectedPoem(poem);
-    setSelectedTrack(null);
-  };
-
-  const selectTrack = (track: Track) => {
-    setSelectedTrack(track);
-    setActiveTrack(track);
-    setSelectedPoem(null);
-  };
-
-  const handleSelectPoem = (poem: Poem) => {
-    selectPoem(poem);
-    onClose();
-  };
-
-  const handleSelectTrack = (track: Track) => {
-    selectTrack(track);
-    onClose();
-  };
+  const pageTitle = selectedTrack
+    ? `${selectedTrack.title} | Arts`
+    : selectedPoem
+      ? `${selectedPoem.title} | Arts`
+      : 'Arts';
 
   return (
     <>
       <Head>
-        <title>Bohdan Harabadzhyu | Arts</title>
+        <title>{`Bohdan Harabadzhyu | ${pageTitle}`}</title>
         <meta name="robots" content="noindex, nofollow" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
@@ -91,14 +101,14 @@ const ArtsPage: NextPage = () => {
               tracks={tracks}
               selectedPoemId={selectedPoem?.id ?? null}
               selectedTrackId={selectedTrack?.id ?? null}
-              onSelectPoem={selectPoem}
-              onSelectTrack={selectTrack}
             />
           </Box>
 
           {/* TrackDisplay stays mounted even when a poem is shown — it owns the
               hidden SoundCloud iframe, and unmounting that crashes the widget script */}
-          {selectedTrack === null && selectedPoem && <PoemDisplay poem={selectedPoem} />}
+          {selectedTrack === null && selectedPoem && (
+            <PoemDisplay key={selectedPoem.id} poem={selectedPoem} />
+          )}
           <TrackDisplay
             track={activeTrack}
             visible={selectedTrack !== null}
@@ -119,8 +129,7 @@ const ArtsPage: NextPage = () => {
             tracks={tracks}
             selectedPoemId={selectedPoem?.id ?? null}
             selectedTrackId={selectedTrack?.id ?? null}
-            onSelectPoem={handleSelectPoem}
-            onSelectTrack={handleSelectTrack}
+            onNavigate={onClose}
             variant="drawer"
           />
         </DrawerContent>
