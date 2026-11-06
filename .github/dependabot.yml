@@ -16,6 +16,16 @@ updates:
       # Remove this once eslint-config-next / the plugins declare support.
       - dependency-name: eslint
         update-types: [version-update:semver-major]
+      # React 19 is a separate migration (Chakra UI v2, framer-motion and the type packages
+      # have to move together). Remove these four entries when you decide to migrate.
+      - dependency-name: react
+        update-types: [version-update:semver-major]
+      - dependency-name: react-dom
+        update-types: [version-update:semver-major]
+      - dependency-name: '@types/react'
+        update-types: [version-update:semver-major]
+      - dependency-name: '@types/react-dom'
+        update-types: [version-update:semver-major]
 
   - package-ecosystem: github-actions
     directory: /
