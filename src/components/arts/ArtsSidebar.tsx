@@ -11,6 +11,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
+import { useRouter } from 'next/router';
 import { FiChevronUp, FiChevronDown, FiPenTool, FiMusic } from 'react-icons/fi';
 import type { IconType } from 'react-icons';
 import { useLanguage } from '@/context/LanguageContext';
@@ -137,34 +138,51 @@ interface SidebarLinkProps {
 }
 
 /** One poem/track. A real link, so it is focusable, middle-clickable and copyable (/arts?poem=3). */
-const SidebarLink: React.FC<SidebarLinkProps> = ({ href, selected, onNavigate, children, colors }) => (
-  <ListItem>
-    <Link
-      as={NextLink}
-      href={href}
-      shallow
-      replace
-      scroll={false}
-      onClick={onNavigate}
-      aria-current={selected ? 'page' : undefined}
-      display="block"
-      py={1.5}
-      px={3}
-      fontSize="sm"
-      fontFamily="var(--font-lora)"
-      borderRadius="md"
-      color={selected ? colors.selected : colors.muted}
-      fontWeight={selected ? '600' : '400'}
-      bg={selected ? colors.selectedBg : 'transparent'}
-      borderLeft={`2px solid ${selected ? colors.selected : 'transparent'}`}
-      transition="color 0.15s, background-color 0.15s"
-      _hover={{ color: colors.text, bg: colors.hoverBg, textDecoration: 'none' }}
-      _focusVisible={{ outline: '2px solid', outlineColor: colors.selected, outlineOffset: '2px' }}
-    >
-      {children}
-    </Link>
-  </ListItem>
-);
+const SidebarLink: React.FC<SidebarLinkProps> = ({ href, selected, onNavigate, children, colors }) => {
+  const router = useRouter();
+
+  // Inside the mobile drawer behave like the old version: close the drawer synchronously and
+  // select the item in the same tick, instead of letting <a>/NextLink navigate while the drawer
+  // is still animating out (the focused link would be unmounted mid-navigation).
+  // Ctrl/Cmd/middle-click still open the link normally.
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (!onNavigate) return; // desktop sidebar: plain NextLink navigation
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+    e.preventDefault();
+    e.currentTarget.blur(); // don't leave focus on an element that is about to disappear
+    onNavigate();
+    void router.replace(href, undefined, { shallow: true, scroll: false });
+  };
+
+  return (
+    <ListItem>
+      <Link
+        as={NextLink}
+        href={href}
+        shallow
+        replace
+        scroll={false}
+        onClick={handleClick}
+        aria-current={selected ? 'page' : undefined}
+        display="block"
+        py={1.5}
+        px={3}
+        fontSize="sm"
+        fontFamily="var(--font-lora)"
+        borderRadius="md"
+        color={selected ? colors.selected : colors.muted}
+        fontWeight={selected ? '600' : '400'}
+        bg={selected ? colors.selectedBg : 'transparent'}
+        borderLeft={`2px solid ${selected ? colors.selected : 'transparent'}`}
+        transition="color 0.15s, background-color 0.15s"
+        _hover={{ color: colors.text, bg: colors.hoverBg, textDecoration: 'none' }}
+        _focusVisible={{ outline: '2px solid', outlineColor: colors.selected, outlineOffset: '2px' }}
+      >
+        {children}
+      </Link>
+    </ListItem>
+  );
+};
 
 const ArtsSidebar: React.FC<ArtsSidebarProps> = ({
                                                    poems, tracks, selectedPoemId, selectedTrackId, onNavigate, variant = 'static',
