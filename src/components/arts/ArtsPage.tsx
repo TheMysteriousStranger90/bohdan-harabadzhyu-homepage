@@ -10,7 +10,7 @@ import type { Poem, Track } from '@/components/arts/ArtsSidebar';
 import poemsData from '@/assets/data/poems.json';
 import tracksData from '@/assets/data/tracks.json';
 import { NextPage } from 'next';
-import { useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { lora } from '@/lib/fonts';
@@ -46,6 +46,20 @@ const ArtsPage: NextPage = () => {
   }
 
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const pendingDrawerHrefRef = useRef<string | null>(null);
+
+  const handleDrawerNavigate = useCallback((href: string) => {
+    pendingDrawerHrefRef.current = href;
+    onClose();
+  }, [onClose]);
+
+  const handleDrawerCloseComplete = useCallback(() => {
+    const href = pendingDrawerHrefRef.current;
+    if (!href) return;
+    pendingDrawerHrefRef.current = null;
+    if (router.asPath === href) return;
+    void router.replace(href, undefined, { shallow: true, scroll: false });
+  }, [router]);
 
   const gradientBackground = useColorModeValue(
     'linear(to-r, #ebf3fc, #d1e7f8)',
@@ -116,7 +130,13 @@ const ArtsPage: NextPage = () => {
         </Flex>
       </Flex>
 
-      <Drawer isOpen={isOpen} placement="left" onClose={onClose} size="xs">
+      <Drawer
+        isOpen={isOpen}
+        placement="left"
+        onClose={onClose}
+        onCloseComplete={handleDrawerCloseComplete}
+        size="xs"
+      >
         <DrawerOverlay />
         <DrawerContent
           bg={mobileBarBg}
@@ -129,7 +149,7 @@ const ArtsPage: NextPage = () => {
             tracks={tracks}
             selectedPoemId={selectedPoem?.id ?? null}
             selectedTrackId={selectedTrack?.id ?? null}
-            onNavigate={onClose}
+            onNavigate={handleDrawerNavigate}
             variant="drawer"
           />
         </DrawerContent>
