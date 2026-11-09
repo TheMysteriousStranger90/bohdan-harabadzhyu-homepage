@@ -19,7 +19,7 @@
     "@emotion/react": "^11.13.5",
     "@emotion/styled": "^11.13.5",
     "@vercel/analytics": "^2.0.1",
-    "@vercel/speed-insights": "^2.0.0",
+    "@vercel/speed-insights": "^2.1.0",
     "framer-motion": "^11.18.2",
     "next": "^15.5.29",
     "react": "^18.3.1",
@@ -29,7 +29,7 @@
   "devDependencies": {
     "@axe-core/playwright": "^4.14.0",
     "@next/eslint-plugin-next": "^15.5.29",
-    "@playwright/test": "~1.63.0",
+    "@playwright/test": "~1.65.0",
     "@types/node": "^22.10.0",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
@@ -38,7 +38,7 @@
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
-    "playwright-core": "~1.63.0",
+    "playwright-core": "~1.65.0",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.72.1"
   },
