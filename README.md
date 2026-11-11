@@ -83,3 +83,11 @@ Accessibility issues that are already known are listed in `tests/e2e/helpers.ts`
 `.github/workflows/ci.yml` runs lint, type-check, build and the Playwright suite on every push / PR,
 plus a weekly `npm audit` of production dependencies. Dependabot (`.github/dependabot.yml`) opens one
 grouped PR per week for minor/patch updates.
+
+## Author
+
+Bohdan Harabadzhyu (Bogdan Garabagiu)
+
+## License
+
+MIT — see [LICENSE](./LICENSE).
